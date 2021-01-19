@@ -13,6 +13,7 @@
 		01E64E5F25B549CC00BF1AE3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01E64E5D25B549CC00BF1AE3 /* Main.storyboard */; };
 		01E64E6D25B54A5900BF1AE3 /* libass.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E64E6C25B54A5900BF1AE3 /* libass.9.dylib */; };
 		01E64E6E25B54A5A00BF1AE3 /* libass.9.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 01E64E6C25B54A5900BF1AE3 /* libass.9.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		01E64E9F25B6C46E00BF1AE3 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 01E64E9E25B6C46E00BF1AE3 /* Cartfile */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -49,6 +50,7 @@
 		01E64E6825B54A1200BF1AE3 /* libass */ = {isa = PBXFileReference; lastKnownFileType = folder; path = libass; sourceTree = "<group>"; };
 		01E64E6C25B54A5900BF1AE3 /* libass.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libass.9.dylib; path = libass/lib/libass.9.dylib; sourceTree = "<group>"; };
 		01E64E7025B54A8900BF1AE3 /* QuickTime ASS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QuickTime ASS-Bridging-Header.h"; sourceTree = "<group>"; };
+		01E64E9E25B6C46E00BF1AE3 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 		01E64E4B25B549C900BF1AE3 = {
 			isa = PBXGroup;
 			children = (
+				01E64E9E25B6C46E00BF1AE3 /* Cartfile */,
 				01E64E6825B54A1200BF1AE3 /* libass */,
 				01E64E5625B549C900BF1AE3 /* QuickTime ASS */,
 				01E64E5525B549C900BF1AE3 /* Products */,
@@ -174,6 +177,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01E64E9F25B6C46E00BF1AE3 /* Cartfile in Resources */,
 				01E64E5C25B549CC00BF1AE3 /* Assets.xcassets in Resources */,
 				01E64E5F25B549CC00BF1AE3 /* Main.storyboard in Resources */,
 			);
