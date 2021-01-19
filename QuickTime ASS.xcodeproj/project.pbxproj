@@ -11,7 +11,32 @@
 		01E64E5A25B549C900BF1AE3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E64E5925B549C900BF1AE3 /* ViewController.swift */; };
 		01E64E5C25B549CC00BF1AE3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01E64E5B25B549CC00BF1AE3 /* Assets.xcassets */; };
 		01E64E5F25B549CC00BF1AE3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01E64E5D25B549CC00BF1AE3 /* Main.storyboard */; };
+		01E64E6D25B54A5900BF1AE3 /* libass.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E64E6C25B54A5900BF1AE3 /* libass.9.dylib */; };
+		01E64E6E25B54A5A00BF1AE3 /* libass.9.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 01E64E6C25B54A5900BF1AE3 /* libass.9.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		01E64E6F25B54A5A00BF1AE3 /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				01E64E6E25B54A5A00BF1AE3 /* libass.9.dylib in Embed Libraries */,
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01E64E9B25B5A79E00BF1AE3 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		01E64E5425B549C900BF1AE3 /* QuickTime ASS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "QuickTime ASS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -21,6 +46,9 @@
 		01E64E5E25B549CC00BF1AE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		01E64E6025B549CC00BF1AE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		01E64E6125B549CC00BF1AE3 /* QuickTime_ASS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QuickTime_ASS.entitlements; sourceTree = "<group>"; };
+		01E64E6825B54A1200BF1AE3 /* libass */ = {isa = PBXFileReference; lastKnownFileType = folder; path = libass; sourceTree = "<group>"; };
+		01E64E6C25B54A5900BF1AE3 /* libass.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libass.9.dylib; path = libass/lib/libass.9.dylib; sourceTree = "<group>"; };
+		01E64E7025B54A8900BF1AE3 /* QuickTime ASS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QuickTime ASS-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -28,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01E64E6D25B54A5900BF1AE3 /* libass.9.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -37,8 +66,10 @@
 		01E64E4B25B549C900BF1AE3 = {
 			isa = PBXGroup;
 			children = (
+				01E64E6825B54A1200BF1AE3 /* libass */,
 				01E64E5625B549C900BF1AE3 /* QuickTime ASS */,
 				01E64E5525B549C900BF1AE3 /* Products */,
+				01E64E6B25B54A5900BF1AE3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -53,14 +84,34 @@
 		01E64E5625B549C900BF1AE3 /* QuickTime ASS */ = {
 			isa = PBXGroup;
 			children = (
+				01E64E7625B54CEA00BF1AE3 /* libass */,
 				01E64E5725B549C900BF1AE3 /* AppDelegate.swift */,
 				01E64E5925B549C900BF1AE3 /* ViewController.swift */,
 				01E64E5B25B549CC00BF1AE3 /* Assets.xcassets */,
 				01E64E5D25B549CC00BF1AE3 /* Main.storyboard */,
 				01E64E6025B549CC00BF1AE3 /* Info.plist */,
 				01E64E6125B549CC00BF1AE3 /* QuickTime_ASS.entitlements */,
+				01E64E7025B54A8900BF1AE3 /* QuickTime ASS-Bridging-Header.h */,
 			);
 			path = "QuickTime ASS";
+			sourceTree = "<group>";
+		};
+		01E64E6B25B54A5900BF1AE3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				01E64E6C25B54A5900BF1AE3 /* libass.9.dylib */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		01E64E7625B54CEA00BF1AE3 /* libass */ = {
+			isa = PBXGroup;
+			children = (
+				01E64E7725B54CFA00BF1AE3 /* Libass.swift */,
+				01E64E7825B54CFA00BF1AE3 /* LibassBlendImage.c */,
+				01E64E7925B54CFA00BF1AE3 /* LibassBlendImage.h */,
+			);
+			path = libass;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -73,6 +124,8 @@
 				01E64E5025B549C900BF1AE3 /* Sources */,
 				01E64E5125B549C900BF1AE3 /* Frameworks */,
 				01E64E5225B549C900BF1AE3 /* Resources */,
+				01E64E6F25B54A5A00BF1AE3 /* Embed Libraries */,
+				01E64E9B25B5A79E00BF1AE3 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -94,6 +147,7 @@
 				TargetAttributes = {
 					01E64E5325B549C900BF1AE3 = {
 						CreatedOnToolsVersion = 12.3;
+						LastSwiftMigration = 1230;
 					};
 				};
 			};
@@ -271,16 +325,24 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "QuickTime ASS/QuickTime_ASS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/libass/include";
 				INFOPLIST_FILE = "QuickTime ASS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/libass/lib",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.xjbeta.QuickTime-ASS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "QuickTime ASS/QuickTime ASS-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -290,16 +352,23 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "QuickTime ASS/QuickTime_ASS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/libass/include";
 				INFOPLIST_FILE = "QuickTime ASS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/libass/lib",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.xjbeta.QuickTime-ASS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "QuickTime ASS/QuickTime ASS-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
