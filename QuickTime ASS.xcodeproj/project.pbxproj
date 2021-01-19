@@ -59,6 +59,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				01E64E6D25B54A5900BF1AE3 /* libass.9.dylib in Frameworks */,
+				01E64EA525B6C6B600BF1AE3 /* Sparkle.framework in Frameworks */,
+				01E64EA425B6C6B500BF1AE3 /* PromiseKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,6 +104,10 @@
 		01E64E6B25B54A5900BF1AE3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				01E64EA025B6C6B500BF1AE3 /* PromiseKit.framework */,
+				01E64EA225B6C6B500BF1AE3 /* PromiseKit.framework.dSYM */,
+				01E64EA125B6C6B500BF1AE3 /* Sparkle.framework */,
+				01E64EA325B6C6B500BF1AE3 /* Sparkle.framework.dSYM */,
 				01E64E6C25B54A5900BF1AE3 /* libass.9.dylib */,
 			);
 			name = Frameworks;
@@ -333,6 +339,10 @@
 				CODE_SIGN_ENTITLEMENTS = "QuickTime ASS/QuickTime_ASS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/libass/include";
 				INFOPLIST_FILE = "QuickTime ASS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -360,6 +370,10 @@
 				CODE_SIGN_ENTITLEMENTS = "QuickTime ASS/QuickTime_ASS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/libass/include";
 				INFOPLIST_FILE = "QuickTime ASS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
