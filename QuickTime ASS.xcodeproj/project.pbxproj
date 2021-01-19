@@ -14,6 +14,10 @@
 		01E64E6D25B54A5900BF1AE3 /* libass.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E64E6C25B54A5900BF1AE3 /* libass.9.dylib */; };
 		01E64E6E25B54A5A00BF1AE3 /* libass.9.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 01E64E6C25B54A5900BF1AE3 /* libass.9.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		01E64E9F25B6C46E00BF1AE3 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 01E64E9E25B6C46E00BF1AE3 /* Cartfile */; };
+		01E64EA425B6C6B500BF1AE3 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E64EA025B6C6B500BF1AE3 /* PromiseKit.framework */; };
+		01E64EA525B6C6B600BF1AE3 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E64EA125B6C6B500BF1AE3 /* Sparkle.framework */; };
+		01E64EA825B6C6E700BF1AE3 /* PromiseKit.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 01E64EA025B6C6B500BF1AE3 /* PromiseKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		01E64EA925B6C6E700BF1AE3 /* Sparkle.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 01E64EA125B6C6B500BF1AE3 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,6 +27,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				01E64EA825B6C6E700BF1AE3 /* PromiseKit.framework in Embed Libraries */,
+				01E64EA925B6C6E700BF1AE3 /* Sparkle.framework in Embed Libraries */,
 				01E64E6E25B54A5A00BF1AE3 /* libass.9.dylib in Embed Libraries */,
 			);
 			name = "Embed Libraries";
@@ -51,6 +57,10 @@
 		01E64E6C25B54A5900BF1AE3 /* libass.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libass.9.dylib; path = libass/lib/libass.9.dylib; sourceTree = "<group>"; };
 		01E64E7025B54A8900BF1AE3 /* QuickTime ASS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QuickTime ASS-Bridging-Header.h"; sourceTree = "<group>"; };
 		01E64E9E25B6C46E00BF1AE3 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
+		01E64EA025B6C6B500BF1AE3 /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = Carthage/Build/Mac/PromiseKit.framework; sourceTree = "<group>"; };
+		01E64EA125B6C6B500BF1AE3 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Carthage/Build/Mac/Sparkle.framework; sourceTree = "<group>"; };
+		01E64EA225B6C6B500BF1AE3 /* PromiseKit.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = PromiseKit.framework.dSYM; path = Carthage/Build/Mac/PromiseKit.framework.dSYM; sourceTree = "<group>"; };
+		01E64EA325B6C6B500BF1AE3 /* Sparkle.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Sparkle.framework.dSYM; path = Carthage/Build/Mac/Sparkle.framework.dSYM; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
