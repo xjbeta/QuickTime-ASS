@@ -13,6 +13,9 @@
 		01E64E5F25B549CC00BF1AE3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01E64E5D25B549CC00BF1AE3 /* Main.storyboard */; };
 		01E64E6D25B54A5900BF1AE3 /* libass.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E64E6C25B54A5900BF1AE3 /* libass.9.dylib */; };
 		01E64E6E25B54A5A00BF1AE3 /* libass.9.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 01E64E6C25B54A5900BF1AE3 /* libass.9.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		01E64E7A25B54CFA00BF1AE3 /* Libass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E64E7725B54CFA00BF1AE3 /* Libass.swift */; };
+		01E64E7B25B54CFA00BF1AE3 /* LibassBlendImage.c in Sources */ = {isa = PBXBuildFile; fileRef = 01E64E7825B54CFA00BF1AE3 /* LibassBlendImage.c */; };
+		01E64E8325B57CDF00BF1AE3 /* PointerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E64E8225B57CDF00BF1AE3 /* PointerExtension.swift */; };
 		01E64E9D25B6BEAA00BF1AE3 /* BXAppleScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E64E9C25B6BEAA00BF1AE3 /* BXAppleScript.swift */; };
 		01E64E9F25B6C46E00BF1AE3 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 01E64E9E25B6C46E00BF1AE3 /* Cartfile */; };
 		01E64EA425B6C6B500BF1AE3 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E64EA025B6C6B500BF1AE3 /* PromiseKit.framework */; };
@@ -57,6 +60,10 @@
 		01E64E6825B54A1200BF1AE3 /* libass */ = {isa = PBXFileReference; lastKnownFileType = folder; path = libass; sourceTree = "<group>"; };
 		01E64E6C25B54A5900BF1AE3 /* libass.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libass.9.dylib; path = libass/lib/libass.9.dylib; sourceTree = "<group>"; };
 		01E64E7025B54A8900BF1AE3 /* QuickTime ASS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QuickTime ASS-Bridging-Header.h"; sourceTree = "<group>"; };
+		01E64E7725B54CFA00BF1AE3 /* Libass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Libass.swift; sourceTree = "<group>"; };
+		01E64E7825B54CFA00BF1AE3 /* LibassBlendImage.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = LibassBlendImage.c; sourceTree = "<group>"; };
+		01E64E7925B54CFA00BF1AE3 /* LibassBlendImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibassBlendImage.h; sourceTree = "<group>"; };
+		01E64E8225B57CDF00BF1AE3 /* PointerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointerExtension.swift; sourceTree = "<group>"; };
 		01E64E9C25B6BEAA00BF1AE3 /* BXAppleScript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BXAppleScript.swift; sourceTree = "<group>"; };
 		01E64E9E25B6C46E00BF1AE3 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		01E64EA025B6C6B500BF1AE3 /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = Carthage/Build/Mac/PromiseKit.framework; sourceTree = "<group>"; };
@@ -101,6 +108,7 @@
 		01E64E5625B549C900BF1AE3 /* QuickTime ASS */ = {
 			isa = PBXGroup;
 			children = (
+				01E64E8125B57CD500BF1AE3 /* Extensions */,
 				01E64E7625B54CEA00BF1AE3 /* libass */,
 				01E64E5725B549C900BF1AE3 /* AppDelegate.swift */,
 				01E64E5925B549C900BF1AE3 /* ViewController.swift */,
@@ -134,6 +142,14 @@
 				01E64E7925B54CFA00BF1AE3 /* LibassBlendImage.h */,
 			);
 			path = libass;
+			sourceTree = "<group>";
+		};
+		01E64E8125B57CD500BF1AE3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				01E64E8225B57CDF00BF1AE3 /* PointerExtension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -209,7 +225,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01E64E7A25B54CFA00BF1AE3 /* Libass.swift in Sources */,
+				01E64E7B25B54CFA00BF1AE3 /* LibassBlendImage.c in Sources */,
 				01E64E5A25B549C900BF1AE3 /* ViewController.swift in Sources */,
+				01E64E8325B57CDF00BF1AE3 /* PointerExtension.swift in Sources */,
 				01E64E5825B549C900BF1AE3 /* AppDelegate.swift in Sources */,
 				01E64E9D25B6BEAA00BF1AE3 /* BXAppleScript.swift in Sources */,
 			);
