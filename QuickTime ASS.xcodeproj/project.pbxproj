@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		01E64E5825B549C900BF1AE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E64E5725B549C900BF1AE3 /* AppDelegate.swift */; };
-		01E64E5A25B549C900BF1AE3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E64E5925B549C900BF1AE3 /* ViewController.swift */; };
+		01E64E5A25B549C900BF1AE3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E64E5925B549C900BF1AE3 /* MainViewController.swift */; };
 		01E64E5C25B549CC00BF1AE3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01E64E5B25B549CC00BF1AE3 /* Assets.xcassets */; };
 		01E64E5F25B549CC00BF1AE3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01E64E5D25B549CC00BF1AE3 /* Main.storyboard */; };
 		01E64E6D25B54A5900BF1AE3 /* libass.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E64E6C25B54A5900BF1AE3 /* libass.9.dylib */; };
@@ -55,7 +55,7 @@
 /* Begin PBXFileReference section */
 		01E64E5425B549C900BF1AE3 /* QuickTime ASS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "QuickTime ASS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		01E64E5725B549C900BF1AE3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		01E64E5925B549C900BF1AE3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		01E64E5925B549C900BF1AE3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		01E64E5B25B549CC00BF1AE3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01E64E5E25B549CC00BF1AE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		01E64E6025B549CC00BF1AE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -117,7 +117,7 @@
 				01E64E7625B54CEA00BF1AE3 /* libass */,
 				01E64E5725B549C900BF1AE3 /* AppDelegate.swift */,
 				01E64EAA25B6E7B300BF1AE3 /* MainWindowController.swift */,
-				01E64E5925B549C900BF1AE3 /* ViewController.swift */,
+				01E64E5925B549C900BF1AE3 /* MainViewController.swift */,
 				01E64E5B25B549CC00BF1AE3 /* Assets.xcassets */,
 				01E64E5D25B549CC00BF1AE3 /* Main.storyboard */,
 				01E64E6025B549CC00BF1AE3 /* Info.plist */,
@@ -234,7 +234,7 @@
 			files = (
 				01E64E7A25B54CFA00BF1AE3 /* Libass.swift in Sources */,
 				01E64E7B25B54CFA00BF1AE3 /* LibassBlendImage.c in Sources */,
-				01E64E5A25B549C900BF1AE3 /* ViewController.swift in Sources */,
+				01E64E5A25B549C900BF1AE3 /* MainViewController.swift in Sources */,
 				01E64E8325B57CDF00BF1AE3 /* PointerExtension.swift in Sources */,
 				01E64EAD25B855B800BF1AE3 /* NotificationNames.swift in Sources */,
 				01E64E5825B549C900BF1AE3 /* AppDelegate.swift in Sources */,
