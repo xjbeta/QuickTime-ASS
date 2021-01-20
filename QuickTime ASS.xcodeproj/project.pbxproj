@@ -58,7 +58,6 @@
 		01E64E5B25B549CC00BF1AE3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01E64E5E25B549CC00BF1AE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		01E64E6025B549CC00BF1AE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		01E64E6125B549CC00BF1AE3 /* QuickTime_ASS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QuickTime_ASS.entitlements; sourceTree = "<group>"; };
 		01E64E6825B54A1200BF1AE3 /* libass */ = {isa = PBXFileReference; lastKnownFileType = folder; path = libass; sourceTree = "<group>"; };
 		01E64E6C25B54A5900BF1AE3 /* libass.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libass.9.dylib; path = libass/lib/libass.9.dylib; sourceTree = "<group>"; };
 		01E64E7025B54A8900BF1AE3 /* QuickTime ASS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QuickTime ASS-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -120,7 +119,6 @@
 				01E64E5B25B549CC00BF1AE3 /* Assets.xcassets */,
 				01E64E5D25B549CC00BF1AE3 /* Main.storyboard */,
 				01E64E6025B549CC00BF1AE3 /* Info.plist */,
-				01E64E6125B549CC00BF1AE3 /* QuickTime_ASS.entitlements */,
 				01E64E7025B54A8900BF1AE3 /* QuickTime ASS-Bridging-Header.h */,
 				01E64E7E25B5655B00BF1AE3 /* QuickTimePlayer.swift */,
 				01E64E9C25B6BEAA00BF1AE3 /* BXAppleScript.swift */,
