@@ -113,11 +113,11 @@ extension AppDelegate: NSMenuDelegate, NSMenuItemValidation {
     
     
     @objc func selectSubtitle() {
+        let title = frontmostAppInfo().windowTitle
         let re = selectSubtitlePanel.runModal()
         guard re == .OK,
               let url = selectSubtitlePanel.url else { return }
-        
-        NotificationCenter.default.post(name: .loadNewSubtilte, object: nil, userInfo: ["url": url.path])
+        NotificationCenter.default.post(name: .loadNewSubtilte, object: nil, userInfo: ["url": url.path, "title": title])
     }
     
 }

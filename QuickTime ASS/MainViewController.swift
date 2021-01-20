@@ -26,8 +26,12 @@ class MainViewController: NSViewController {
         
         NotificationCenter.default.addObserver(forName: .loadNewSubtilte, object: nil, queue: .main) {
             guard let info = $0.userInfo as? [String: String],
-                  let url = info["url"] else { return }
+                  let url = info["url"],
+                  let title = info["title"],
+                  let wc = self.view.window?.windowController as? MainWindowController else { return }
             
+            wc.targeTitle = title
+            wc.resizeWindow()
             self.libass.setFile(url)
             self.startTimer()
         }
