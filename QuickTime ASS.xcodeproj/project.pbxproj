@@ -24,6 +24,7 @@
 		01E64EA825B6C6E700BF1AE3 /* PromiseKit.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 01E64EA025B6C6B500BF1AE3 /* PromiseKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		01E64EA925B6C6E700BF1AE3 /* Sparkle.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 01E64EA125B6C6B500BF1AE3 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		01E64EAB25B6E7B300BF1AE3 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E64EAA25B6E7B300BF1AE3 /* MainWindowController.swift */; };
+		01E64EAD25B855B800BF1AE3 /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E64EAC25B855B800BF1AE3 /* NotificationNames.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -73,6 +74,7 @@
 		01E64EA225B6C6B500BF1AE3 /* PromiseKit.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = PromiseKit.framework.dSYM; path = Carthage/Build/Mac/PromiseKit.framework.dSYM; sourceTree = "<group>"; };
 		01E64EA325B6C6B500BF1AE3 /* Sparkle.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Sparkle.framework.dSYM; path = Carthage/Build/Mac/Sparkle.framework.dSYM; sourceTree = "<group>"; };
 		01E64EAA25B6E7B300BF1AE3 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
+		01E64EAC25B855B800BF1AE3 /* NotificationNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNames.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				01E64E8225B57CDF00BF1AE3 /* PointerExtension.swift */,
+				01E64EAC25B855B800BF1AE3 /* NotificationNames.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -233,6 +236,7 @@
 				01E64E7B25B54CFA00BF1AE3 /* LibassBlendImage.c in Sources */,
 				01E64E5A25B549C900BF1AE3 /* ViewController.swift in Sources */,
 				01E64E8325B57CDF00BF1AE3 /* PointerExtension.swift in Sources */,
+				01E64EAD25B855B800BF1AE3 /* NotificationNames.swift in Sources */,
 				01E64E5825B549C900BF1AE3 /* AppDelegate.swift in Sources */,
 				01E64E7F25B5655B00BF1AE3 /* QuickTimePlayer.swift in Sources */,
 				01E64EAB25B6E7B300BF1AE3 /* MainWindowController.swift in Sources */,
