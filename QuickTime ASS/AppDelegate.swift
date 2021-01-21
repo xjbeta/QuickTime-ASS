@@ -6,11 +6,14 @@
 //
 
 import Cocoa
+import ScriptingBridge
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
     
     let quickTimeIdentifier = "com.apple.QuickTimePlayerX"
+    
+    let qtPlayer = SBApplication(bundleIdentifier: "com.apple.QuickTimePlayerX") as! QuickTimePlayerApplication
     
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
     
