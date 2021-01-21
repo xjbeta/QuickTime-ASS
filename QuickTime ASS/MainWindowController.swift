@@ -9,6 +9,8 @@ import Cocoa
 
 class MainWindowController: NSWindowController {
 
+    let player = (NSApp.delegate as! AppDelegate).qtPlayer
+    
     var targeTitle = ""
     
     override func windowDidLoad() {
@@ -20,7 +22,9 @@ class MainWindowController: NSWindowController {
         window?.ignoresMouseEvents = true
         window?.orderOut(self)
         
-        NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(foremostAppActivated), name: NSWorkspace.didActivateApplicationNotification, object: nil)
+        NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(updateWindowState), name: NSWorkspace.didActivateApplicationNotification, object: nil)
+        
+        NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(updateWindowState), name: NSWorkspace.activeSpaceDidChangeNotification, object: nil)
         
         NotificationCenter.default.addObserver(forName: .resizeWindow, object: nil, queue: .main) { _ in
             self.resizeWindow()
@@ -31,7 +35,7 @@ class MainWindowController: NSWindowController {
         }
     }
     
-    @objc func foremostAppActivated(_ notification: NSNotification) {
+    @objc func updateWindowState(_ notification: NSNotification) {
         guard let app = NSWorkspace.shared.frontmostApplication,
               let appDelegate = NSApp.delegate as? AppDelegate,
               app.bundleIdentifier == appDelegate.quickTimeIdentifier else {
@@ -42,21 +46,8 @@ class MainWindowController: NSWindowController {
                 return
         }
         
-        print("AXIsProcessTrusted  \(AXIsProcessTrusted())")
-        guard AXIsProcessTrusted() else {
-            let alert = NSAlert()
-            alert.alertStyle = .critical
-            alert.messageText = "No accessibility API permission."
-            alert.informativeText = "Check enableDanmaku check in preferences."
-            alert.addButton(withTitle: "OK")
-            let response = alert.runModal()
-//            if response == .alertFirstButtonReturn {
-//                Preferences.shared.enableDanmaku = false
-//            }
-            return
-        }
-        
         setObserver(app.processIdentifier)
+        self.resizeWindow()
     }
     
     func acquirePrivileges(_ block: @escaping (Bool) -> Void) {
@@ -125,6 +116,12 @@ class MainWindowController: NSWindowController {
             kAXResizedNotification as CFString,
             s)
         
+//        AXObserverAddNotification(
+//            obs,
+//            windowRef as! AXUIElement,
+//            kaxnotification as CFString,
+//            s)
+        
         var children: CFTypeRef?
         AXUIElementCopyAttributeValue(windowRef as! AXUIElement, kAXChildrenAttribute as CFString, &children)
         
@@ -143,54 +140,29 @@ class MainWindowController: NSWindowController {
             kAXValueChangedNotification as CFString,
             s)
         
-    
-        
-        
         CFRunLoopAddSource(
             CFRunLoopGetCurrent(),
             AXObserverGetRunLoopSource(obs),
             CFRunLoopMode.commonModes)
     }
     
-    func resizeWindow() {
-        guard let pid = NSWorkspace.shared.frontmostApplication?.processIdentifier else { return }
-        
-        let app = AXUIElementCreateApplication(pid)
-        var children: CFTypeRef?
-        AXUIElementCopyAttributeValue(app, kAXChildrenAttribute as CFString, &children)
-        
-        guard let windows = children as? [AXUIElement] else { return }
-        
-        let targeWindows = windows.filter { element in
-            var title: CFTypeRef?
-            AXUIElementCopyAttributeValue(element, kAXTitleAttribute as CFString, &title)
-            
-            if let t = title as? String, t == targeTitle {
-                return true
-            }
-            return false
-        }
-        
-        guard let targeWindow = targeWindows.first else { return }
-        
-        var position: CFTypeRef?
-        var size: CFTypeRef?
-        var p = CGPoint()
-        var s = CGSize()
-        AXUIElementCopyAttributeValue(targeWindow, kAXPositionAttribute as CFString, &position)
-        AXUIElementCopyAttributeValue(targeWindow, kAXSizeAttribute as CFString, &size)
+    @objc func resizeWindow() {
+        guard let w = self.window,
+              let windows = player.windows?(),
+              let window = windows.first(where: { $0.document?.file?.lastPathComponent == targeTitle }),
+              let doc = window.document,
+              var rect = window.bounds,
+              let screen = NSScreen.main else { return }
 
-        guard position != nil, size != nil else { return }
-        AXValueGetValue(position as! AXValue, AXValueType.cgPoint, &p)
-        AXValueGetValue(size as! AXValue, AXValueType.cgSize, &s)
+        (w.contentViewController as? MainViewController)?.document = doc
         
-        var rect = NSRect(origin: p, size: s)
+        rect.origin.y = screen.frame.height - rect.height - rect.origin.y
         
-        rect.origin.y = (NSScreen.main?.frame.size.height)! - rect.size.height - rect.origin.y
-        guard let window = window else { return }
-        window.setFrame(rect, display: true)
-        if !window.isVisible {
-            window.orderFront(self)
+        w.setFrame(rect, display: true)
+        
+
+        if !w.isVisible || !w.isOnActiveSpace {
+            w.orderFront(self)
             print("show subtitle window")
         }
     }
