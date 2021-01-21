@@ -105,12 +105,12 @@ extension SBObject: QuickTimePlayerDocument {}
 @objc public protocol QuickTimePlayerWindow: SBObjectProtocol {
     @objc optional func id() // The unique identifier of the window.
     @objc optional var index: Int { get } // The index of the window, ordered front to back.
-    @objc optional var bounds: Int { get } // The bounding rectangle of the window.
+    @objc optional var bounds: NSRect { get } // The bounding rectangle of the window.
     @objc optional var closeable: Int { get } // Does the window have a close button?
     @objc optional var miniaturizable: Int { get } // Does the window have a minimize button?
     @objc optional var miniaturized: Int { get } // Is the window minimized right now?
     @objc optional var resizable: Int { get } // Can the window be resized?
-    @objc optional var visible: Int { get } // Is the window visible right now?
+    @objc optional var visible: Bool { get } // Is the window visible right now?
     @objc optional var zoomable: Int { get } // Does the window have a zoom button?
     @objc optional var zoomed: Int { get } // Is the window zoomed right now?
     @objc optional var document: QuickTimePlayerDocument { get } // The document whose contents are displayed in the window.
