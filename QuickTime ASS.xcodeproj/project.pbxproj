@@ -18,7 +18,6 @@
 		01E64E7B25B54CFA00BF1AE3 /* LibassBlendImage.c in Sources */ = {isa = PBXBuildFile; fileRef = 01E64E7825B54CFA00BF1AE3 /* LibassBlendImage.c */; };
 		01E64E7F25B5655B00BF1AE3 /* QuickTimePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E64E7E25B5655B00BF1AE3 /* QuickTimePlayer.swift */; };
 		01E64E8325B57CDF00BF1AE3 /* PointerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E64E8225B57CDF00BF1AE3 /* PointerExtension.swift */; };
-		01E64E9D25B6BEAA00BF1AE3 /* BXAppleScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E64E9C25B6BEAA00BF1AE3 /* BXAppleScript.swift */; };
 		01E64E9F25B6C46E00BF1AE3 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 01E64E9E25B6C46E00BF1AE3 /* Cartfile */; };
 		01E64EA425B6C6B500BF1AE3 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E64EA025B6C6B500BF1AE3 /* PromiseKit.framework */; };
 		01E64EA525B6C6B600BF1AE3 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E64EA125B6C6B500BF1AE3 /* Sparkle.framework */; };
@@ -70,7 +69,6 @@
 		01E64E7925B54CFA00BF1AE3 /* LibassBlendImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibassBlendImage.h; sourceTree = "<group>"; };
 		01E64E7E25B5655B00BF1AE3 /* QuickTimePlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickTimePlayer.swift; sourceTree = "<group>"; };
 		01E64E8225B57CDF00BF1AE3 /* PointerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointerExtension.swift; sourceTree = "<group>"; };
-		01E64E9C25B6BEAA00BF1AE3 /* BXAppleScript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BXAppleScript.swift; sourceTree = "<group>"; };
 		01E64E9E25B6C46E00BF1AE3 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		01E64EA025B6C6B500BF1AE3 /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = Carthage/Build/Mac/PromiseKit.framework; sourceTree = "<group>"; };
 		01E64EA125B6C6B500BF1AE3 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Carthage/Build/Mac/Sparkle.framework; sourceTree = "<group>"; };
@@ -128,7 +126,6 @@
 				01E64E6025B549CC00BF1AE3 /* Info.plist */,
 				01E64E7025B54A8900BF1AE3 /* QuickTime ASS-Bridging-Header.h */,
 				01E64E7E25B5655B00BF1AE3 /* QuickTimePlayer.swift */,
-				01E64E9C25B6BEAA00BF1AE3 /* BXAppleScript.swift */,
 			);
 			path = "QuickTime ASS";
 			sourceTree = "<group>";
@@ -246,7 +243,6 @@
 				01E64E5825B549C900BF1AE3 /* AppDelegate.swift in Sources */,
 				01E64E7F25B5655B00BF1AE3 /* QuickTimePlayer.swift in Sources */,
 				01E64EAB25B6E7B300BF1AE3 /* MainWindowController.swift in Sources */,
-				01E64E9D25B6BEAA00BF1AE3 /* BXAppleScript.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
