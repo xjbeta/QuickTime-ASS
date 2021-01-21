@@ -87,9 +87,8 @@ class MainViewController: NSViewController {
     }
 
     func initTimer() {
-        timer.schedule(deadline: .now(), repeating: .milliseconds(250))
+        timer.schedule(deadline: .now(), repeating: .milliseconds(100))
         timer.setEventHandler {
-            print("cTime")
             guard let cTime = self.playerWindow?.document?.currentTime else { return }
             
             let time = Int64(cTime * 1000)

@@ -13,7 +13,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     let quickTimeIdentifier = "com.apple.QuickTimePlayerX"
     
-    let qtPlayer = SBApplication(bundleIdentifier: "com.apple.QuickTimePlayerX") as! QuickTimePlayerApplication
+    let qtPlayer: QuickTimePlayerApplication = SBApplication(bundleIdentifier: "com.apple.QuickTimePlayerX")!
     
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
     
@@ -36,6 +36,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        
         
         initMainMenu()
         
