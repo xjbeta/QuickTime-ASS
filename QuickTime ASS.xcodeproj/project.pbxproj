@@ -16,7 +16,6 @@
 		01E64E6E25B54A5A00BF1AE3 /* libass.9.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 01E64E6C25B54A5900BF1AE3 /* libass.9.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		01E64E7A25B54CFA00BF1AE3 /* Libass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E64E7725B54CFA00BF1AE3 /* Libass.swift */; };
 		01E64E7B25B54CFA00BF1AE3 /* LibassBlendImage.c in Sources */ = {isa = PBXBuildFile; fileRef = 01E64E7825B54CFA00BF1AE3 /* LibassBlendImage.c */; };
-		01E64E7F25B5655B00BF1AE3 /* QuickTimePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E64E7E25B5655B00BF1AE3 /* QuickTimePlayer.swift */; };
 		01E64E8325B57CDF00BF1AE3 /* PointerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E64E8225B57CDF00BF1AE3 /* PointerExtension.swift */; };
 		01E64E9F25B6C46E00BF1AE3 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 01E64E9E25B6C46E00BF1AE3 /* Cartfile */; };
 		01E64EA425B6C6B500BF1AE3 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E64EA025B6C6B500BF1AE3 /* PromiseKit.framework */; };
@@ -67,7 +66,6 @@
 		01E64E7725B54CFA00BF1AE3 /* Libass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Libass.swift; sourceTree = "<group>"; };
 		01E64E7825B54CFA00BF1AE3 /* LibassBlendImage.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = LibassBlendImage.c; sourceTree = "<group>"; };
 		01E64E7925B54CFA00BF1AE3 /* LibassBlendImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibassBlendImage.h; sourceTree = "<group>"; };
-		01E64E7E25B5655B00BF1AE3 /* QuickTimePlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickTimePlayer.swift; sourceTree = "<group>"; };
 		01E64E8225B57CDF00BF1AE3 /* PointerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointerExtension.swift; sourceTree = "<group>"; };
 		01E64E9E25B6C46E00BF1AE3 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		01E64EA025B6C6B500BF1AE3 /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = Carthage/Build/Mac/PromiseKit.framework; sourceTree = "<group>"; };
@@ -125,7 +123,6 @@
 				01E64E5D25B549CC00BF1AE3 /* Main.storyboard */,
 				01E64E6025B549CC00BF1AE3 /* Info.plist */,
 				01E64E7025B54A8900BF1AE3 /* QuickTime ASS-Bridging-Header.h */,
-				01E64E7E25B5655B00BF1AE3 /* QuickTimePlayer.swift */,
 			);
 			path = "QuickTime ASS";
 			sourceTree = "<group>";
@@ -241,7 +238,6 @@
 				01E64E8325B57CDF00BF1AE3 /* PointerExtension.swift in Sources */,
 				01E64EAD25B855B800BF1AE3 /* NotificationNames.swift in Sources */,
 				01E64E5825B549C900BF1AE3 /* AppDelegate.swift in Sources */,
-				01E64E7F25B5655B00BF1AE3 /* QuickTimePlayer.swift in Sources */,
 				01E64EAB25B6E7B300BF1AE3 /* MainWindowController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
