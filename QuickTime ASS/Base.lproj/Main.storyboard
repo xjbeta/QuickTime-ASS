@@ -710,19 +710,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <ikImageView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wVM-VQ-jMd">
+                            <ikImageView wantsLayer="YES" zoomFactor="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="wVM-VQ-jMd">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </ikImageView>
+                            <box boxType="custom" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="5DP-fU-kG2">
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                                <view key="contentView" id="u6s-Ya-qRM">
+                                    <rect key="frame" x="1" y="1" width="478" height="268"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <color key="borderColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
+                                <color key="fillColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </box>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="5DP-fU-kG2" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="D9d-cF-usI"/>
                             <constraint firstItem="wVM-VQ-jMd" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="J0f-u6-GPI"/>
                             <constraint firstAttribute="bottom" secondItem="wVM-VQ-jMd" secondAttribute="bottom" id="bJ9-rY-YAa"/>
+                            <constraint firstAttribute="trailing" secondItem="5DP-fU-kG2" secondAttribute="trailing" id="bvC-0r-viq"/>
+                            <constraint firstItem="5DP-fU-kG2" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="cVw-j5-TGt"/>
                             <constraint firstItem="wVM-VQ-jMd" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="fQR-OQ-sLZ"/>
+                            <constraint firstAttribute="bottom" secondItem="5DP-fU-kG2" secondAttribute="bottom" id="h6A-fH-wN1"/>
                             <constraint firstAttribute="trailing" secondItem="wVM-VQ-jMd" secondAttribute="trailing" id="qSO-Z3-iCm"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="debugBox" destination="5DP-fU-kG2" id="5pC-qv-cYm"/>
                         <outlet property="imageView" destination="wVM-VQ-jMd" id="cSP-Ya-NXS"/>
                     </connections>
                 </viewController>
