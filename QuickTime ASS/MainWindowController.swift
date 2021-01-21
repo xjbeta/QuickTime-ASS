@@ -12,6 +12,11 @@ class MainWindowController: NSWindowController {
     let player = (NSApp.delegate as! AppDelegate).qtPlayer
     
     var targeTitle = ""
+    var windowInFront = false {
+        didSet {
+            NotificationCenter.default.post(name: .updateTargeWindowState, object: nil)
+        }
+    }
     
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -37,7 +42,7 @@ class MainWindowController: NSWindowController {
               app.bundleIdentifier == appDelegate.quickTimeIdentifier else {
                 if let window = window, window.isVisible {
                     window.orderOut(self)
-                    print("hide subtitle window")
+                    windowInFront = false
                 }
                 return
         }
@@ -75,13 +80,7 @@ class MainWindowController: NSWindowController {
                 let wc = Unmanaged<MainWindowController>.fromOpaque(ref).takeUnretainedValue()
                 wc.resizeWindow()
             case kAXValueChangedNotification:
-                var value: CFTypeRef?
-                AXUIElementCopyAttributeValue(element, kAXValueAttribute as CFString, &value)
-                guard value != nil,
-                      let n = value as? NSNumber else { return }
-                let isPlaying = n.intValue == 1
-                print(isPlaying)
-                
+                NotificationCenter.default.post(name: .updatePlayState, object: nil)
             default:
                 break
             }
@@ -112,12 +111,6 @@ class MainWindowController: NSWindowController {
             kAXResizedNotification as CFString,
             s)
         
-//        AXObserverAddNotification(
-//            obs,
-//            windowRef as! AXUIElement,
-//            kaxnotification as CFString,
-//            s)
-        
         var children: CFTypeRef?
         AXUIElementCopyAttributeValue(windowRef as! AXUIElement, kAXChildrenAttribute as CFString, &children)
         
@@ -146,11 +139,10 @@ class MainWindowController: NSWindowController {
         guard let w = self.window,
               let windows = player.windows?(),
               let window = windows.first(where: { $0.document?.file?.lastPathComponent == targeTitle }),
-              let doc = window.document,
               var rect = window.bounds,
               let screen = NSScreen.main else { return }
 
-        (w.contentViewController as? MainViewController)?.document = doc
+        (w.contentViewController as? MainViewController)?.playerWindow = window
         
         rect.origin.y = screen.frame.height - rect.height - rect.origin.y
         
@@ -159,7 +151,7 @@ class MainWindowController: NSWindowController {
 
         if !w.isVisible || !w.isOnActiveSpace {
             w.orderFront(self)
-            print("show subtitle window")
+            windowInFront = true
         }
     }
     

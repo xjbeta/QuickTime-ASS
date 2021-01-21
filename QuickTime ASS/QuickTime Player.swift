@@ -79,7 +79,7 @@ extension SBApplication: QuickTimePlayerApplication {}
     @objc optional var looping: Int { get } // Is the movie playing in a loop?
     @objc optional var muted: Int { get } // Is the movie muted?
     @objc optional var naturalDimensions: Int { get } // The natural dimensions of the movie.
-    @objc optional var playing: Int { get } // Is the movie playing?
+    @objc optional var playing: Bool { get } // Is the movie playing?
     @objc optional var rate: Double { get } // The current rate of the movie.
     @objc optional var presenting: Int { get } // Is the movie presented in full screen?
     @objc optional var currentMicrophone: QuickTimePlayerAudioRecordingDevice { get } // The currently previewing audio device.
