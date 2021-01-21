@@ -26,10 +26,6 @@ class MainWindowController: NSWindowController {
         
         NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(updateWindowState), name: NSWorkspace.activeSpaceDidChangeNotification, object: nil)
         
-        NotificationCenter.default.addObserver(forName: .resizeWindow, object: nil, queue: .main) { _ in
-            self.resizeWindow()
-        }
-        
         acquirePrivileges {
             print("Accessibility enabled: \($0)")
         }

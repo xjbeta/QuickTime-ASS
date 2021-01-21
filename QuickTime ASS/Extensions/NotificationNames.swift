@@ -9,5 +9,5 @@ import Cocoa
 
 extension Notification.Name {
     static let loadNewSubtilte = Notification.Name("com.xjbeta.QuickTime ASS.loadNewSubtilte")
-    static let resizeWindow = Notification.Name("com.xjbeta.QuickTime ASS.resizeWindow")
+    
 }
