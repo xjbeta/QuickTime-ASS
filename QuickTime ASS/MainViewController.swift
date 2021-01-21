@@ -10,16 +10,21 @@ import Quartz
 
 class MainViewController: NSViewController {
     
+    @IBOutlet var debugBox: NSBox!
     @IBOutlet var imageView: IKImageView!
     
     let libass = Libass(size: CGSize(width: 1920, height: 1080))
     
-    let player = QuickTimePlayer()
+    let player = (NSApp.delegate as! AppDelegate).qtPlayer
+    var document: QuickTimePlayerDocument? = nil
     
     let timer = DispatchSource.makeTimerSource(flags: [], queue: .main)
     
+    var lastRequestTime: Int64 = -1
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        imageView.isHidden = true
         
         imageView.backgroundColor = .clear
         imageView.setImage(nil, imageProperties: nil)
@@ -47,13 +52,14 @@ class MainViewController: NSViewController {
     func startTimer() {
         timer.schedule(deadline: .now(), repeating: .milliseconds(250))
         timer.setEventHandler {
-            self.player.currentTime().done(on: .main) {
-                if let image = self.libass.generateImage(Int64($0)) {
-                    self.imageView.setImage(image, imageProperties: nil)
-                }
-            }.catch {
-                print($0)
-            }
+            guard let cTime = self.document?.currentTime else { return }
+            let time = Int64(cTime * 1000)
+            guard self.lastRequestTime != time else { return }
+            
+            self.lastRequestTime = time
+            guard let image = self.libass.generateImage(time) else { return }
+            self.imageView.setImage(image, imageProperties: nil)
+            self.imageView.isHidden = false
         }
         timer.resume()
     }
