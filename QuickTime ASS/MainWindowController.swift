@@ -9,9 +9,8 @@ import Cocoa
 
 class MainWindowController: NSWindowController {
 
-    let player = (NSApp.delegate as! AppDelegate).qtPlayer
+    let player = QTPlayer.shared
     
-    var targeTitle = ""
     var windowInFront = false {
         didSet {
             NotificationCenter.default.post(name: .updateTargeWindowState, object: nil)
@@ -37,9 +36,9 @@ class MainWindowController: NSWindowController {
     }
     
     @objc func updateWindowState(_ notification: NSNotification) {
-        guard let app = NSWorkspace.shared.frontmostApplication,
-              let appDelegate = NSApp.delegate as? AppDelegate,
-              app.bundleIdentifier == appDelegate.quickTimeIdentifier else {
+        
+        let info = QTPlayer.shared.frontmostAppInfo()
+        guard info.isQTPlayer else {
                 if let window = window, window.isVisible {
                     window.orderOut(self)
                     windowInFront = false
@@ -47,7 +46,7 @@ class MainWindowController: NSWindowController {
                 return
         }
         
-        setObserver(app.processIdentifier)
+        setObserver(info.processIdentifier)
         self.resizeWindow()
     }
     
@@ -137,12 +136,11 @@ class MainWindowController: NSWindowController {
     
     @objc func resizeWindow() {
         guard let w = self.window,
-              let windows = player.windows?(),
-              let window = windows.first(where: { $0.document?.file?.lastPathComponent == targeTitle }),
-              var rect = window.bounds,
+              let pWindow = player.targeWindow(),
+              var rect = pWindow.bounds,
               let screen = NSScreen.main else { return }
 
-        (w.contentViewController as? MainViewController)?.playerWindow = window
+        (w.contentViewController as? MainViewController)?.playerWindow = pWindow
         
         rect.origin.y = screen.frame.height - rect.height - rect.origin.y
         

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0128F8E325BA567F00B3E674 /* QTPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0128F8E225BA567F00B3E674 /* QTPlayer.swift */; };
 		01A588C825B9351400B3C164 /* QuickTime Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A588C725B9351400B3C164 /* QuickTime Player.swift */; };
 		01E64E5825B549C900BF1AE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E64E5725B549C900BF1AE3 /* AppDelegate.swift */; };
 		01E64E5A25B549C900BF1AE3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E64E5925B549C900BF1AE3 /* MainViewController.swift */; };
@@ -52,6 +53,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0128F8E225BA567F00B3E674 /* QTPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QTPlayer.swift; sourceTree = "<group>"; };
 		01A588C725B9351400B3C164 /* QuickTime Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "QuickTime Player.swift"; sourceTree = "<group>"; };
 		01A588C925B9356400B3C164 /* QuickTime Player.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QuickTime Player.h"; sourceTree = "<group>"; };
 		01E64E5425B549C900BF1AE3 /* QuickTime ASS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "QuickTime ASS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -123,6 +125,7 @@
 				01E64E5D25B549CC00BF1AE3 /* Main.storyboard */,
 				01E64E6025B549CC00BF1AE3 /* Info.plist */,
 				01E64E7025B54A8900BF1AE3 /* QuickTime ASS-Bridging-Header.h */,
+				0128F8E225BA567F00B3E674 /* QTPlayer.swift */,
 			);
 			path = "QuickTime ASS";
 			sourceTree = "<group>";
@@ -239,6 +242,7 @@
 				01E64EAD25B855B800BF1AE3 /* NotificationNames.swift in Sources */,
 				01E64E5825B549C900BF1AE3 /* AppDelegate.swift in Sources */,
 				01E64EAB25B6E7B300BF1AE3 /* MainWindowController.swift in Sources */,
+				0128F8E325BA567F00B3E674 /* QTPlayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

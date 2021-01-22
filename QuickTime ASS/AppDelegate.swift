@@ -11,10 +11,6 @@ import ScriptingBridge
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
     
-    let quickTimeIdentifier = "com.apple.QuickTimePlayerX"
-    
-    let qtPlayer: QuickTimePlayerApplication = SBApplication(bundleIdentifier: "com.apple.QuickTimePlayerX")!
-    
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
     
     let keyAppName = NSMenuItem()
@@ -29,15 +25,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return p
     }()
     
-    struct FrontmostAppInfo {
-        var name = "unknown"
-        var windowTitle = "unknown"
-        var bundleIdentifier = "unknown"
-    }
-
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        
-        
         initMainMenu()
         
         if let button = statusItem.button {
@@ -72,9 +60,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 extension AppDelegate: NSMenuDelegate, NSMenuItemValidation {
     func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
-        let info = frontmostAppInfo()
+        let player = QTPlayer.shared
+        let info = player.frontmostAppInfo()
         if menuItem.action == #selector(selectSubtitle) {
-            return info.bundleIdentifier == quickTimeIdentifier
+            return info.bundleIdentifier == player.quickTimeIdentifier
         }
         
         
@@ -83,45 +72,21 @@ extension AppDelegate: NSMenuDelegate, NSMenuItemValidation {
     }
     
     func menuNeedsUpdate(_ menu: NSMenu) {
-        let info = frontmostAppInfo()
+        let player = QTPlayer.shared
+        let info = player.frontmostAppInfo()
         keyAppName.title = info.name
         keyWindowTitle.title = info.windowTitle
     }
     
-    
-    func frontmostAppInfo() -> FrontmostAppInfo {
-        var info = FrontmostAppInfo()
-        let def = info.name
-        guard let app = NSWorkspace.shared.frontmostApplication else {
-            return info
-        }
-        info.bundleIdentifier = app.bundleIdentifier ?? def
-        info.name = app.localizedName ?? def
-        
-        var window: CFTypeRef?
-        AXUIElementCopyAttributeValue(
-            AXUIElementCreateApplication(app.processIdentifier),
-            kAXFocusedWindowAttribute as CFString,
-            &window)
-        
-        guard window != nil else {
-            return info
-        }
-        
-        var title: CFTypeRef?
-        AXUIElementCopyAttributeValue(window as! AXUIElement, kAXTitleAttribute as CFString, &title)
-        
-        info.windowTitle = title as? String ?? def
-        return info
-    }
-    
-    
     @objc func selectSubtitle() {
-        let title = frontmostAppInfo().windowTitle
+        let player = QTPlayer.shared
+        let info = player.frontmostAppInfo()
         let re = selectSubtitlePanel.runModal()
         guard re == .OK,
               let url = selectSubtitlePanel.url else { return }
-        NotificationCenter.default.post(name: .loadNewSubtilte, object: nil, userInfo: ["url": url.path, "title": title])
+        NotificationCenter.default.post(name: .loadNewSubtilte, object: nil, userInfo: ["url": url.path])
+        
+        player.targeWindowTitle = info.windowTitle
     }
     
 }

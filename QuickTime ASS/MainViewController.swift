@@ -15,7 +15,7 @@ class MainViewController: NSViewController {
     
     let libass = Libass(size: CGSize(width: 1920, height: 1080))
     
-    let player = (NSApp.delegate as! AppDelegate).qtPlayer
+    let player = QTPlayer.shared
     var playerWindow: QuickTimePlayerWindow? = nil
     
     let timer = DispatchSource.makeTimerSource(flags: [], queue: .main)
@@ -30,23 +30,23 @@ class MainViewController: NSViewController {
         imageView.backgroundColor = .clear
         imageView.setImage(nil, imageProperties: nil)
         
-        NotificationCenter.default.addObserver(forName: .loadNewSubtilte, object: nil, queue: .main) {
+        let nCenter = NotificationCenter.default
+        
+        nCenter.addObserver(forName: .loadNewSubtilte, object: nil, queue: .main) {
             guard let info = $0.userInfo as? [String: String],
                   let url = info["url"],
-                  let title = info["title"],
                   let wc = self.view.window?.windowController as? MainWindowController else { return }
             
-            wc.targeTitle = title
             wc.resizeWindow()
             self.libass.setFile(url)
             self.initTimer()
         }
         
-        NotificationCenter.default.addObserver(forName: .updatePlayState, object: nil, queue: .main) { _ in
+        nCenter.addObserver(forName: .updatePlayState, object: nil, queue: .main) { _ in
             self.updateTimerState()
         }
         
-        NotificationCenter.default.addObserver(forName: .updateTargeWindowState, object: nil, queue: .main) { _ in
+        nCenter.addObserver(forName: .updateTargeWindowState, object: nil, queue: .main) { _ in
             self.updateTimerState()
         }
     }
