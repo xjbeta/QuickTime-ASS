@@ -11,6 +11,8 @@ class MainWindowController: NSWindowController {
 
     let player = QTPlayer.shared
     
+    var targeWindow: QuickTimePlayerWindow?
+    
     var windowInFront = false {
         didSet {
             NotificationCenter.default.post(name: .updateTargeWindowState, object: nil)
@@ -74,10 +76,16 @@ class MainWindowController: NSWindowController {
 
             let str = String(notification)
             switch str {
-            case kAXMovedNotification, kAXResizedNotification:
+            case kAXMovedNotification:
                 guard let ref = refcon else { return }
                 let wc = Unmanaged<MainWindowController>.fromOpaque(ref).takeUnretainedValue()
                 wc.resizeWindow()
+            case kAXResizedNotification:
+                // resizeWindow doesn't work well on Resized
+                guard let ref = refcon else { return }
+                let wc = Unmanaged<MainWindowController>.fromOpaque(ref).takeUnretainedValue()
+                wc.resizeWindowA(element)
+        
             case kAXValueChangedNotification:
                 NotificationCenter.default.post(name: .updatePlayState, object: nil)
             default:
@@ -141,6 +149,34 @@ class MainWindowController: NSWindowController {
               let screen = NSScreen.main else { return }
 
         (w.contentViewController as? MainViewController)?.playerWindow = pWindow
+        
+        rect.origin.y = screen.frame.height - rect.height - rect.origin.y
+        
+        w.setFrame(rect, display: true)
+        
+
+        if !w.isVisible || !w.isOnActiveSpace {
+            w.orderFront(self)
+            windowInFront = true
+        }
+    }
+    
+    @objc func resizeWindowA(_ window: AXUIElement) {
+        var position: CFTypeRef?
+        var size: CFTypeRef?
+        var p = CGPoint()
+        var s = CGSize()
+        AXUIElementCopyAttributeValue(window, kAXPositionAttribute as CFString, &position)
+        AXUIElementCopyAttributeValue(window, kAXSizeAttribute as CFString, &size)
+        
+        guard position != nil,
+              size != nil,
+              let w = self.window,
+              let screen = NSScreen.main else { return }
+        AXValueGetValue(position as! AXValue, AXValueType.cgPoint, &p)
+        AXValueGetValue(size as! AXValue, AXValueType.cgSize, &s)
+        
+        var rect = NSRect(origin: p, size: s)
         
         rect.origin.y = screen.frame.height - rect.height - rect.origin.y
         
