@@ -14,6 +14,7 @@ class MainViewController: NSViewController {
     @IBOutlet var debugBox: NSBox!
     
     var libass: Libass? = nil
+    var currentCGImage: CGImage? = nil
     
     let player = QTPlayer.shared
     var playerWindow: QuickTimePlayerWindow? = nil
@@ -118,7 +119,7 @@ class MainViewController: NSViewController {
         
         lastRequestTime = time
         guard let image = libass?.generateImage(time) else { return }
-        
+        currentCGImage = image
         guard let size = playerWindow?.bounds?.size else { return }
         
         imageView.image = NSImage(cgImage: image, size: size)

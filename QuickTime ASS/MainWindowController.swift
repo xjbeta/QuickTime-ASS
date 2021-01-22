@@ -79,9 +79,8 @@ class MainWindowController: NSWindowController {
             
             switch String(notification) {
             case kAXMovedNotification:
-                wc.resizeWindow()
+                wc.resizeWindowA(element)
             case kAXResizedNotification:
-                // resizeWindow doesn't work well on Resized
                 wc.resizeWindowA(element)
             case kAXValueChangedNotification:
                 var des: CFTypeRef?
@@ -204,6 +203,8 @@ class MainWindowController: NSWindowController {
         
         rect.origin.y = screen.frame.height - rect.height - rect.origin.y
         
+        updateImageSize(rect)
+        
         w.setFrame(rect, display: true)
         
 
@@ -211,6 +212,12 @@ class MainWindowController: NSWindowController {
             w.orderFront(self)
             windowInFront = true
         }
+    }
+    
+    func updateImageSize(_ rect: NSRect) {
+        guard let vc = window?.contentViewController as? MainViewController,
+              let image = vc.currentCGImage else { return }
+        vc.imageView.image = NSImage(cgImage: image, size: rect.size)
     }
     
 }
