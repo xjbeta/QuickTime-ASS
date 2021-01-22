@@ -84,9 +84,8 @@ extension AppDelegate: NSMenuDelegate, NSMenuItemValidation {
         let re = selectSubtitlePanel.runModal()
         guard re == .OK,
               let url = selectSubtitlePanel.url else { return }
-        NotificationCenter.default.post(name: .loadNewSubtilte, object: nil, userInfo: ["url": url.path])
-        
         player.targeWindowTitle = info.windowTitle
+        NotificationCenter.default.post(name: .loadNewSubtilte, object: nil, userInfo: ["url": url.path])
     }
     
 }

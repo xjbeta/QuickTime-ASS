@@ -85,7 +85,6 @@ class MainWindowController: NSWindowController {
                 guard let ref = refcon else { return }
                 let wc = Unmanaged<MainWindowController>.fromOpaque(ref).takeUnretainedValue()
                 wc.resizeWindowA(element)
-        
             case kAXValueChangedNotification:
                 NotificationCenter.default.post(name: .updatePlayState, object: nil)
             default:
@@ -147,8 +146,6 @@ class MainWindowController: NSWindowController {
               let pWindow = player.targeWindow(),
               var rect = pWindow.bounds,
               let screen = NSScreen.main else { return }
-
-        (w.contentViewController as? MainViewController)?.playerWindow = pWindow
         
         rect.origin.y = screen.frame.height - rect.height - rect.origin.y
         

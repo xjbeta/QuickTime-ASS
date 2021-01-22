@@ -13,7 +13,7 @@ class MainViewController: NSViewController {
     @IBOutlet var debugBox: NSBox!
     @IBOutlet var imageView: IKImageView!
     
-    let libass = Libass(size: CGSize(width: 1920, height: 1080))
+    var libass: Libass? = nil
     
     let player = QTPlayer.shared
     var playerWindow: QuickTimePlayerWindow? = nil
@@ -37,8 +37,13 @@ class MainViewController: NSViewController {
                   let url = info["url"],
                   let wc = self.view.window?.windowController as? MainWindowController else { return }
             
+            self.playerWindow = self.player.targeWindow()
+            var size = self.playerWindow?.bounds?.size ?? .zero
+            
+            self.libass = Libass(size: size)
+            
             wc.resizeWindow()
-            self.libass.setFile(url)
+            self.libass?.setFile(url)
             self.initTimer()
         }
         
@@ -95,7 +100,7 @@ class MainViewController: NSViewController {
             guard self.lastRequestTime != time else { return }
             
             self.lastRequestTime = time
-            guard let image = self.libass.generateImage(time) else { return }
+            guard let image = self.libass?.generateImage(time) else { return }
             self.imageView.setImage(image, imageProperties: nil)
             self.imageView.isHidden = false
         }
