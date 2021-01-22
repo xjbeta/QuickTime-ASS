@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
-        <plugIn identifier="com.apple.imagekit.ibplugin" version="17701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -710,10 +709,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <ikImageView wantsLayer="YES" zoomFactor="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="wVM-VQ-jMd">
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KEH-Hx-stX">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
-                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </ikImageView>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="Ztx-eY-tYm"/>
+                            </imageView>
                             <box boxType="custom" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="5DP-fU-kG2">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                                 <view key="contentView" id="u6s-Ya-qRM">
@@ -725,19 +724,19 @@
                             </box>
                         </subviews>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="KEH-Hx-stX" secondAttribute="bottom" id="5E4-26-R49"/>
+                            <constraint firstItem="KEH-Hx-stX" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="5cK-V0-X4C"/>
+                            <constraint firstAttribute="trailing" secondItem="KEH-Hx-stX" secondAttribute="trailing" id="B1S-ib-HJl"/>
                             <constraint firstItem="5DP-fU-kG2" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="D9d-cF-usI"/>
-                            <constraint firstItem="wVM-VQ-jMd" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="J0f-u6-GPI"/>
-                            <constraint firstAttribute="bottom" secondItem="wVM-VQ-jMd" secondAttribute="bottom" id="bJ9-rY-YAa"/>
+                            <constraint firstItem="KEH-Hx-stX" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="Ruq-XR-GsQ"/>
                             <constraint firstAttribute="trailing" secondItem="5DP-fU-kG2" secondAttribute="trailing" id="bvC-0r-viq"/>
                             <constraint firstItem="5DP-fU-kG2" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="cVw-j5-TGt"/>
-                            <constraint firstItem="wVM-VQ-jMd" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="fQR-OQ-sLZ"/>
                             <constraint firstAttribute="bottom" secondItem="5DP-fU-kG2" secondAttribute="bottom" id="h6A-fH-wN1"/>
-                            <constraint firstAttribute="trailing" secondItem="wVM-VQ-jMd" secondAttribute="trailing" id="qSO-Z3-iCm"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="debugBox" destination="5DP-fU-kG2" id="5pC-qv-cYm"/>
-                        <outlet property="imageView" destination="wVM-VQ-jMd" id="cSP-Ya-NXS"/>
+                        <outlet property="imageView" destination="KEH-Hx-stX" id="tTK-p9-WDi"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

@@ -10,8 +10,8 @@ import Quartz
 
 class MainViewController: NSViewController {
     
+    @IBOutlet var imageView: NSImageView!
     @IBOutlet var debugBox: NSBox!
-    @IBOutlet var imageView: IKImageView!
     
     var libass: Libass? = nil
     
@@ -26,19 +26,28 @@ class MainViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         imageView.isHidden = true
-        
-        imageView.backgroundColor = .clear
-        imageView.setImage(nil, imageProperties: nil)
-        
+
         let nCenter = NotificationCenter.default
         
         nCenter.addObserver(forName: .loadNewSubtilte, object: nil, queue: .main) {
             guard let info = $0.userInfo as? [String: String],
                   let url = info["url"],
-                  let wc = self.view.window?.windowController as? MainWindowController else { return }
+                  let wc = self.view.window?.windowController as? MainWindowController,
+                  let tWindow = self.player.targeWindow() else {
+                print("load subtitle failed, not found url info or targe window.")
+                return
+            }
             
-            self.playerWindow = self.player.targeWindow()
-            var size = self.playerWindow?.bounds?.size ?? .zero
+            self.playerWindow = tWindow
+            
+            guard var size = self.playerWindow?.bounds?.size,
+                  let scale = NSScreen.main?.backingScaleFactor else {
+                print("load subtitle failed, not player info window or screen scale.")
+                return
+            }
+            
+            size.width *= scale
+            size.height *= scale
             
             self.libass = Libass(size: size)
             
@@ -94,19 +103,25 @@ class MainViewController: NSViewController {
     func initTimer() {
         timer.schedule(deadline: .now(), repeating: .milliseconds(100))
         timer.setEventHandler {
-            guard let cTime = self.playerWindow?.document?.currentTime else { return }
-            
-            let time = Int64(cTime * 1000)
-            guard self.lastRequestTime != time else { return }
-            
-            self.lastRequestTime = time
-            guard let image = self.libass?.generateImage(time) else { return }
-            self.imageView.setImage(image, imageProperties: nil)
-            self.imageView.isHidden = false
+            self.updateSubtitle()
         }
         timer.resume()
         timerIsRunning = true
         updateTimerState()
+    }
+    
+    func updateSubtitle() {
+        guard let cTime = playerWindow?.document?.currentTime else { return }
+        
+        let time = Int64(cTime * 1000)
+        guard lastRequestTime != time else { return }
+        
+        lastRequestTime = time
+        guard let image = libass?.generateImage(time) else { return }
+        
+        guard let size = playerWindow?.bounds?.size else { return }
+        
+        imageView.image = NSImage(cgImage: image, size: size)
     }
 }
 
