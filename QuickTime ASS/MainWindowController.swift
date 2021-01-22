@@ -74,24 +74,35 @@ class MainWindowController: NSWindowController {
         let observerCallback: AXObserverCallback = {
             observer, element, notification, refcon in
 
-            let str = String(notification)
-            switch str {
+            guard let ref = refcon else { return }
+            let wc = Unmanaged<MainWindowController>.fromOpaque(ref).takeUnretainedValue()
+            
+            switch String(notification) {
             case kAXMovedNotification:
-                guard let ref = refcon else { return }
-                let wc = Unmanaged<MainWindowController>.fromOpaque(ref).takeUnretainedValue()
                 wc.resizeWindow()
             case kAXResizedNotification:
                 // resizeWindow doesn't work well on Resized
-                guard let ref = refcon else { return }
-                let wc = Unmanaged<MainWindowController>.fromOpaque(ref).takeUnretainedValue()
                 wc.resizeWindowA(element)
             case kAXValueChangedNotification:
-                NotificationCenter.default.post(name: .updatePlayState, object: nil)
+                var des: CFTypeRef?
+                AXUIElementCopyAttributeValue(element, kAXDescription as CFString, &des)
+                guard let str = des as? String else { return }
+
+                switch str {
+                case "play/pause":
+                    NotificationCenter.default.post(name: .updatePlayState, object: nil)
+                case "timeline":
+                    guard let vc = wc.contentViewController as? MainViewController,
+                          let playing = vc.playerWindow?.document?.playing,
+                          !playing else { return }
+                    vc.updateSubtitle()
+                default:
+                    break
+                }
             default:
                 break
             }
         }
-        
         
         var window: CFTypeRef?
         
@@ -134,6 +145,22 @@ class MainWindowController: NSWindowController {
             pauseButtonRef,
             kAXValueChangedNotification as CFString,
             s)
+        
+        let timeSlider = elements.first { element in
+            var des: CFTypeRef?
+            AXUIElementCopyAttributeValue(element, kAXDescription as CFString, &des)
+            return des as? String == "timeline"
+        }
+
+        guard let timeSliderRef = timeSlider else { return }
+
+        let error = AXObserverAddNotification(
+            obs,
+            timeSliderRef,
+            kAXValueChangedNotification as CFString,
+            s)
+        
+        print(error)
         
         CFRunLoopAddSource(
             CFRunLoopGetCurrent(),

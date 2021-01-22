@@ -122,6 +122,7 @@ class MainViewController: NSViewController {
         guard let size = playerWindow?.bounds?.size else { return }
         
         imageView.image = NSImage(cgImage: image, size: size)
+        imageView.isHidden = false
     }
 }
 
