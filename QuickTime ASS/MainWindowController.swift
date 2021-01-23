@@ -49,10 +49,6 @@ class MainWindowController: NSWindowController {
         
         NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(updateWindowState), name: NSWorkspace.activeSpaceDidChangeNotification, object: nil)
         
-        acquirePrivileges {
-            print("Accessibility enabled: \($0)")
-        }
-        
         NotificationCenter.default.addObserver(forName: .loadNewSubtilte, object: nil, queue: .main) {
             guard let uInfo = $0.userInfo as? [String: Any],
                   let url = uInfo["url"] as? String,
@@ -98,23 +94,6 @@ class MainWindowController: NSWindowController {
                 return
         }
         self.resizeWindow()
-    }
-    
-    func acquirePrivileges(_ block: @escaping (Bool) -> Void) {
-        let trusted = kAXTrustedCheckOptionPrompt.takeUnretainedValue()
-        let privOptions = [trusted: true] as CFDictionary
-        let accessEnabled = AXIsProcessTrustedWithOptions(privOptions)
-        if !accessEnabled {
-            let alert = NSAlert()
-            alert.messageText = "Enable QuickTimer Player ASS"
-            alert.informativeText = "Once you have enabled QuickTimer Player ASS in System Preferences, click OK."
-
-            alert.runModal()
-            let t = AXIsProcessTrustedWithOptions(privOptions)
-            block(t)
-        } else {
-            block(true)
-        }
     }
     
     func setObserver(_ pid: pid_t) {

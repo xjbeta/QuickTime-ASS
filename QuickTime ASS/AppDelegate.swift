@@ -33,6 +33,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             image?.size = .init(width: 22, height: 22)
             button.image = image
         }
+        
+        acquirePrivileges {
+            print("Accessibility enabled: \($0)")
+        }
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -66,9 +70,7 @@ extension AppDelegate: NSMenuDelegate, NSMenuItemValidation {
             return info.bundleIdentifier == player.quickTimeIdentifier
         }
         
-        
         return false
-        
     }
     
     func menuNeedsUpdate(_ menu: NSMenu) {
@@ -76,6 +78,12 @@ extension AppDelegate: NSMenuDelegate, NSMenuItemValidation {
         let info = player.frontmostAppInfo()
         keyAppName.title = info.name
         keyWindowTitle.title = info.windowTitle
+    }
+    
+    func menuWillOpen(_ menu: NSMenu) {
+        acquirePrivileges {
+            print("Accessibility enabled: \($0)")
+        }
     }
     
     @objc func selectSubtitle() {
@@ -89,6 +97,23 @@ extension AppDelegate: NSMenuDelegate, NSMenuItemValidation {
             name: .loadNewSubtilte,
             object: nil,
             userInfo: ["url": url.path, "info": info])
+    }
+    
+    func acquirePrivileges(_ block: @escaping (Bool) -> Void) {
+        let trusted = kAXTrustedCheckOptionPrompt.takeUnretainedValue()
+        let privOptions = [trusted: true] as CFDictionary
+        let accessEnabled = AXIsProcessTrustedWithOptions(privOptions)
+        if !accessEnabled {
+            let alert = NSAlert()
+            alert.messageText = "Enable QuickTimer Player ASS"
+            alert.informativeText = "Once you have enabled QuickTimer Player ASS in System Preferences, click OK."
+
+            alert.runModal()
+            let t = AXIsProcessTrustedWithOptions(privOptions)
+            block(t)
+        } else {
+            block(true)
+        }
     }
     
 }
