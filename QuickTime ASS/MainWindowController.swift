@@ -11,7 +11,10 @@ import AXSwift
 class MainWindowController: NSWindowController {
 
     let player = QTPlayer.shared
-    var targeWindow: QuickTimePlayerWindow?
+    
+    var targePlayerWindow: QuickTimePlayerWindow?
+    var targeWindowTitle: String?
+    var targeProcessIdentifier: pid_t?
     
     var mainVC: MainViewController? {
         get {
@@ -49,10 +52,43 @@ class MainWindowController: NSWindowController {
         acquirePrivileges {
             print("Accessibility enabled: \($0)")
         }
+        
+        NotificationCenter.default.addObserver(forName: .loadNewSubtilte, object: nil, queue: .main) {
+            guard let uInfo = $0.userInfo as? [String: Any],
+                  let url = uInfo["url"] as? String,
+                  let info = uInfo["info"] as? QTPlayer.FrontmostAppInfo,
+                  let targeWindow = QTPlayer.shared.app.windows?().first(where: {
+                    $0.document?.file?.lastPathComponent == info.windowTitle
+                }) else {
+                print("load subtitle failed, not found url info or targe window.")
+                return
+            }
+            
+            self.targeWindowTitle = info.windowTitle
+            self.targeProcessIdentifier = info.processIdentifier
+            self.targePlayerWindow = targeWindow
+            
+            guard var size = targeWindow.bounds?.size,
+                  let scale = NSScreen.main?.backingScaleFactor else {
+                print("load subtitle failed, not player info window or screen scale.")
+                return
+            }
+            
+            size.width *= scale
+            size.height *= scale
+            
+            self.mainVC?.libass = Libass(size: size)
+            
+            self.resizeWindow()
+            self.mainVC?.libass?.setFile(url)
+            self.mainVC?.initTimer()
+            
+            self.setObserver(info.processIdentifier)
+        }
     }
     
     @objc func updateWindowState(_ notification: NSNotification) {
-        
+        guard targePlayerWindow != nil else { return }
         let info = QTPlayer.shared.frontmostAppInfo()
         guard info.isQTPlayer else {
                 if let window = window, window.isVisible {
@@ -61,8 +97,6 @@ class MainWindowController: NSWindowController {
                 }
                 return
         }
-        
-        setObserver(info.processIdentifier)
         self.resizeWindow()
     }
     
@@ -109,7 +143,7 @@ class MainWindowController: NSWindowController {
         
         do {
             guard let window = try app.windows()?.first(where: {
-                try $0.attribute(.title) == player.targeWindowTitle
+                try $0.attribute(.title) == targeWindowTitle
             }) else { return }
             try observer?.addNotification(.moved, forElement: window)
             try observer?.addNotification(.resized, forElement: window)
@@ -134,7 +168,7 @@ class MainWindowController: NSWindowController {
     
     @objc func resizeWindow() {
         guard let w = self.window,
-              let pWindow = player.targeWindow(),
+              let pWindow = targePlayerWindow,
               var rect = pWindow.bounds,
               let screen = NSScreen.main else { return }
         

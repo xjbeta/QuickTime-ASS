@@ -8,6 +8,7 @@
 import Foundation
 import Cocoa
 import ScriptingBridge
+import AXSwift
 
 class QTPlayer: NSObject {
     
@@ -21,25 +22,13 @@ class QTPlayer: NSObject {
     
     let app: QuickTimePlayerApplication = SBApplication(bundleIdentifier: "com.apple.QuickTimePlayerX")!
     
-    var targeWindowTitle: String?
-    
     struct FrontmostAppInfo {
         var isQTPlayer = false
-        var isTargeWindow = false
         
         var processIdentifier: pid_t = -1
         var name = "unknown"
         var windowTitle = "unknown"
         var bundleIdentifier = "unknown"
-    }
-    
-    func targeWindow() -> QuickTimePlayerWindow? {
-        guard let windows = app.windows?(),
-              let window = windows.first(where: { $0.document?.file?.lastPathComponent == targeWindowTitle }) else {
-            return nil
-        }
-        
-        return window
     }
     
     func frontmostAppInfo() -> FrontmostAppInfo {
@@ -53,21 +42,18 @@ class QTPlayer: NSObject {
         info.isQTPlayer = info.bundleIdentifier == quickTimeIdentifier
         info.name = app.localizedName ?? def
         
-        var window: CFTypeRef?
-        AXUIElementCopyAttributeValue(
-            AXUIElementCreateApplication(app.processIdentifier),
-            kAXFocusedWindowAttribute as CFString,
-            &window)
+        var title = def
         
-        guard window != nil else {
-            return info
+        do {
+            let a = Application(forProcessID: app.processIdentifier)
+            let window: UIElement? = try a?.attribute(.focusedWindow)
+            let t: String? = try window?.attribute(.title)
+            title = t ?? def
+        } catch let error {
+            print(error)
         }
         
-        var title: CFTypeRef?
-        AXUIElementCopyAttributeValue(window as! AXUIElement, kAXTitleAttribute as CFString, &title)
-        
-        info.windowTitle = title as? String ?? def
-        info.isTargeWindow = info.windowTitle == targeWindowTitle
+        info.windowTitle = title
         
         return info
     }
