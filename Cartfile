@@ -1,2 +1,3 @@
 github "sparkle-project/Sparkle"
 github "mxcl/PromiseKit"
+github "tmandry/AXSwift"

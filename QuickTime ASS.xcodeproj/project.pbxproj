@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0128F8E325BA567F00B3E674 /* QTPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0128F8E225BA567F00B3E674 /* QTPlayer.swift */; };
+		0198EA0A25BBC961002D0B2A /* AXSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0198EA0825BBC961002D0B2A /* AXSwift.framework */; };
+		0198EA0B25BBC96D002D0B2A /* AXSwift.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 0198EA0825BBC961002D0B2A /* AXSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		01A588C825B9351400B3C164 /* QuickTime Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A588C725B9351400B3C164 /* QuickTime Player.swift */; };
 		01E64E5825B549C900BF1AE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E64E5725B549C900BF1AE3 /* AppDelegate.swift */; };
 		01E64E5A25B549C900BF1AE3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E64E5925B549C900BF1AE3 /* MainViewController.swift */; };
@@ -34,6 +36,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				0198EA0B25BBC96D002D0B2A /* AXSwift.framework in Embed Libraries */,
 				01E64EA825B6C6E700BF1AE3 /* PromiseKit.framework in Embed Libraries */,
 				01E64EA925B6C6E700BF1AE3 /* Sparkle.framework in Embed Libraries */,
 				01E64E6E25B54A5A00BF1AE3 /* libass.9.dylib in Embed Libraries */,
@@ -54,6 +57,8 @@
 
 /* Begin PBXFileReference section */
 		0128F8E225BA567F00B3E674 /* QTPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QTPlayer.swift; sourceTree = "<group>"; };
+		0198EA0725BBC961002D0B2A /* AXSwift.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = AXSwift.framework.dSYM; path = Carthage/Build/Mac/AXSwift.framework.dSYM; sourceTree = "<group>"; };
+		0198EA0825BBC961002D0B2A /* AXSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AXSwift.framework; path = Carthage/Build/Mac/AXSwift.framework; sourceTree = "<group>"; };
 		01A588C725B9351400B3C164 /* QuickTime Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "QuickTime Player.swift"; sourceTree = "<group>"; };
 		01A588C925B9356400B3C164 /* QuickTime Player.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QuickTime Player.h"; sourceTree = "<group>"; };
 		01E64E5425B549C900BF1AE3 /* QuickTime ASS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "QuickTime ASS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,6 +91,7 @@
 				01E64E6D25B54A5900BF1AE3 /* libass.9.dylib in Frameworks */,
 				01E64EA525B6C6B600BF1AE3 /* Sparkle.framework in Frameworks */,
 				01E64EA425B6C6B500BF1AE3 /* PromiseKit.framework in Frameworks */,
+				0198EA0A25BBC961002D0B2A /* AXSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,6 +139,8 @@
 		01E64E6B25B54A5900BF1AE3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0198EA0825BBC961002D0B2A /* AXSwift.framework */,
+				0198EA0725BBC961002D0B2A /* AXSwift.framework.dSYM */,
 				01E64EA025B6C6B500BF1AE3 /* PromiseKit.framework */,
 				01E64EA225B6C6B500BF1AE3 /* PromiseKit.framework.dSYM */,
 				01E64EA125B6C6B500BF1AE3 /* Sparkle.framework */,
