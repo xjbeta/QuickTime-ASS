@@ -6,18 +6,32 @@
 //
 
 import Cocoa
+import AXSwift
 
 class MainWindowController: NSWindowController {
 
     let player = QTPlayer.shared
-    
     var targeWindow: QuickTimePlayerWindow?
+    
+    var mainVC: MainViewController? {
+        get {
+            return window?.contentViewController as? MainViewController
+        }
+    }
     
     var windowInFront = false {
         didSet {
-            NotificationCenter.default.post(name: .updateTargeWindowState, object: nil)
+            updateTimerState()
         }
     }
+    
+    var playing = true {
+        didSet {
+            updateTimerState()
+        }
+    }
+    
+    var observer: Observer? = nil
     
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -70,101 +84,52 @@ class MainWindowController: NSWindowController {
     }
     
     func setObserver(_ pid: pid_t) {
-
-        let observerCallback: AXObserverCallback = {
-            observer, element, notification, refcon in
-
-            guard let ref = refcon else { return }
-            let wc = Unmanaged<MainWindowController>.fromOpaque(ref).takeUnretainedValue()
-            
-            switch String(notification) {
-            case kAXMovedNotification:
-                wc.resizeWindowA(element)
-            case kAXResizedNotification:
-                wc.resizeWindowA(element)
-            case kAXValueChangedNotification:
-                var des: CFTypeRef?
-                AXUIElementCopyAttributeValue(element, kAXDescription as CFString, &des)
-                guard let str = des as? String else { return }
-
-                switch str {
-                case "play/pause":
-                    NotificationCenter.default.post(name: .updatePlayState, object: nil)
-                case "timeline":
-                    guard let vc = wc.contentViewController as? MainViewController,
-                          let playing = vc.playerWindow?.document?.playing,
-                          !playing else { return }
-                    vc.updateSubtitle()
+        guard let app = Application(forProcessID: pid) else { return }
+        
+        observer = app.createObserver { observer, element, notification in
+            do {
+                switch notification {
+                case .moved, .resized:
+                    guard let frame: NSRect? = try element.attribute(.frame),
+                          let f = frame else { return }
+                    self.resizeWindowAX(f)
+                case .valueChanged where try element.attribute(.description) == "play/pause":
+                    guard let playing: Bool? = try element.attribute(.value),
+                          let p = playing else { return }
+                    self.playing = p
+                case .valueChanged where try element.attribute(.description) == "timeline":
+                    self.mainVC?.updateSubtitle()
                 default:
                     break
                 }
-            default:
-                break
+            } catch let error {
+                print(error)
             }
         }
         
-        var window: CFTypeRef?
-        
-        let app = AXUIElementCreateApplication(pid)
-        AXUIElementCopyAttributeValue(app, kAXFocusedWindowAttribute as CFString, &window)
-        
-        let observer = UnsafeMutablePointer<AXObserver?>.allocate(capacity: 1)
-        AXObserverCreate(pid, observerCallback as AXObserverCallback, observer)
-
-        guard let obs = observer.pointee,
-              let windowRef = window else { return }
-        
-        let s = UnsafeMutableRawPointer(Unmanaged.passUnretained(self).toOpaque())
-        
-        AXObserverAddNotification(
-            obs,
-            windowRef as! AXUIElement,
-            kAXMovedNotification as CFString,
-            s)
-        AXObserverAddNotification(
-            obs,
-            windowRef as! AXUIElement,
-            kAXResizedNotification as CFString,
-            s)
-        
-        var children: CFTypeRef?
-        AXUIElementCopyAttributeValue(windowRef as! AXUIElement, kAXChildrenAttribute as CFString, &children)
-        
-        let elements = children as! [AXUIElement]
-        let pauseButton = elements.first { element in
-            var des: CFTypeRef?
-            AXUIElementCopyAttributeValue(element, kAXDescription as CFString, &des)
-            return des as? String == "play/pause"
+        do {
+            guard let window = try app.windows()?.first(where: {
+                try $0.attribute(.title) == player.targeWindowTitle
+            }) else { return }
+            try observer?.addNotification(.moved, forElement: window)
+            try observer?.addNotification(.resized, forElement: window)
+            
+            guard let elements: [UIElement] = try window.arrayAttribute(.children) else { return }
+            
+            try elements.forEach {
+                let str: String? = try $0.attribute(.description)
+                switch str {
+                case "play/pause":
+                    try observer?.addNotification(.valueChanged, forElement: $0)
+                case "timeline":
+                    try observer?.addNotification(.valueChanged, forElement: $0)
+                default:
+                    break
+                }
+            }
+        } catch let error {
+            print(error)
         }
-        
-        guard let pauseButtonRef = pauseButton else { return }
-        
-        AXObserverAddNotification(
-            obs,
-            pauseButtonRef,
-            kAXValueChangedNotification as CFString,
-            s)
-        
-        let timeSlider = elements.first { element in
-            var des: CFTypeRef?
-            AXUIElementCopyAttributeValue(element, kAXDescription as CFString, &des)
-            return des as? String == "timeline"
-        }
-
-        guard let timeSliderRef = timeSlider else { return }
-
-        let error = AXObserverAddNotification(
-            obs,
-            timeSliderRef,
-            kAXValueChangedNotification as CFString,
-            s)
-        
-        print(error)
-        
-        CFRunLoopAddSource(
-            CFRunLoopGetCurrent(),
-            AXObserverGetRunLoopSource(obs),
-            CFRunLoopMode.commonModes)
     }
     
     @objc func resizeWindow() {
@@ -184,28 +149,16 @@ class MainWindowController: NSWindowController {
         }
     }
     
-    @objc func resizeWindowA(_ window: AXUIElement) {
-        var position: CFTypeRef?
-        var size: CFTypeRef?
-        var p = CGPoint()
-        var s = CGSize()
-        AXUIElementCopyAttributeValue(window, kAXPositionAttribute as CFString, &position)
-        AXUIElementCopyAttributeValue(window, kAXSizeAttribute as CFString, &size)
-        
-        guard position != nil,
-              size != nil,
-              let w = self.window,
+    func resizeWindowAX(_ rect: NSRect) {
+        guard let w = self.window,
               let screen = NSScreen.main else { return }
-        AXValueGetValue(position as! AXValue, AXValueType.cgPoint, &p)
-        AXValueGetValue(size as! AXValue, AXValueType.cgSize, &s)
         
-        var rect = NSRect(origin: p, size: s)
+        var r = rect
+        r.origin.y = screen.frame.height - r.height - r.origin.y
         
-        rect.origin.y = screen.frame.height - rect.height - rect.origin.y
+        updateImageSize(r)
         
-        updateImageSize(rect)
-        
-        w.setFrame(rect, display: true)
+        w.setFrame(r, display: true)
         
 
         if !w.isVisible || !w.isOnActiveSpace {
@@ -215,9 +168,20 @@ class MainWindowController: NSWindowController {
     }
     
     func updateImageSize(_ rect: NSRect) {
-        guard let vc = window?.contentViewController as? MainViewController,
+        guard let vc = mainVC,
               let image = vc.currentCGImage else { return }
         vc.imageView.image = NSImage(cgImage: image, size: rect.size)
+    }
+    
+    func updateTimerState() {
+        guard let vc = mainVC else { return }
+        print("isPlaying \(playing)", "windowInFront \(windowInFront)")
+        
+        if !playing || !windowInFront {
+            vc.suspendTimer()
+        } else {
+            vc.suspendTimer(false)
+        }
     }
     
 }

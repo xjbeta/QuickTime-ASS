@@ -57,33 +57,11 @@ class MainViewController: NSViewController {
             self.initTimer()
         }
         
-        nCenter.addObserver(forName: .updatePlayState, object: nil, queue: .main) { _ in
-            self.updateTimerState()
-        }
-        
-        nCenter.addObserver(forName: .updateTargeWindowState, object: nil, queue: .main) { _ in
-            self.updateTimerState()
-        }
     }
 
     override var representedObject: Any? {
         didSet {
         // Update the view, if already loaded.
-        }
-    }
-    
-    func updateTimerState() {
-        guard let isPlaying = playerWindow?.document?.playing,
-              let wc = view.window?.windowController as? MainWindowController else { return }
-        let windowInFront = wc.windowInFront
-        
-        print("isPlaying \(isPlaying)", "windowInFront \(windowInFront)")
-        
-        
-        if !isPlaying || !windowInFront {
-            suspendTimer()
-        } else {
-            suspendTimer(false)
         }
     }
     
@@ -106,9 +84,9 @@ class MainViewController: NSViewController {
         timer.setEventHandler {
             self.updateSubtitle()
         }
-        timer.resume()
-        timerIsRunning = true
-        updateTimerState()
+        
+        guard let wc = view.window?.windowController as? MainWindowController else { return }
+        wc.updateTimerState()
     }
     
     func updateSubtitle() {
