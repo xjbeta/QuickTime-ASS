@@ -63,6 +63,8 @@ class MainWindowController: NSWindowController {
             self.targeWindowTitle = info.windowTitle
             self.targeProcessIdentifier = info.processIdentifier
             self.targePlayerWindow = targeWindow
+            self.resizeWindow()
+            self.setObserver(info.processIdentifier)
             
             guard var size = targeWindow.bounds?.size,
                   let scale = NSScreen.main?.backingScaleFactor else {
@@ -72,14 +74,10 @@ class MainWindowController: NSWindowController {
             
             size.width *= scale
             size.height *= scale
-            
             self.mainVC?.libass = Libass(size: size)
-            
-            self.resizeWindow()
+            self.mainVC?.imageView.image = nil
             self.mainVC?.libass?.setFile(url)
             self.mainVC?.initTimer()
-            
-            self.setObserver(info.processIdentifier)
         }
     }
     

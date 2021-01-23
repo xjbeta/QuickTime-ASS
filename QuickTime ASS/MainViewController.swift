@@ -62,6 +62,7 @@ class MainViewController: NSViewController {
         
         guard let wc = mainWC else { return }
         wc.updateTimerState()
+        updateSubtitle()
     }
     
     func updateSubtitle() {
