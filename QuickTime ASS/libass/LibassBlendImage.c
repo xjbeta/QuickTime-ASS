@@ -36,7 +36,7 @@ static void blend_single(image_t * frame, ASS_Image *img)
     unsigned char *dst;
 
     src = img->bitmap;
-    dst = frame->buffer + img->dst_y * frame->stride + img->dst_x * 4;
+    dst = frame->buffer;
     for (y = 0; y < img->h; ++y) {
         for (x = 0; x < img->w; ++x) {
             unsigned k = ((unsigned) src[x]) * opacity / 255;
@@ -55,20 +55,11 @@ static void blend_single(image_t * frame, ASS_Image *img)
     }
 }
 
-static void blend(image_t * frame, ASS_Image *img)
+image_t blendBitmapData(ASS_Image *img)
 {
-    int cnt = 0;
-    while (img) {
-        blend_single(frame, img);
-        ++cnt;
-        img = img->next;
-    }
-    printf("libass: %d images blended\n", cnt);
-}
-
-image_t blendBitmapData(ASS_Image *img, int width, int height)
-{
-    image_t *frame = gen_image(width, height);
-    blend(frame, img);
+    image_t *frame = gen_image(img->w, img->h);
+    frame->x = img->dst_x;
+    frame->y = img->dst_y;
+    blend_single(frame, img);
     return *frame;
 }

@@ -13,11 +13,12 @@
 #include <ass.h>
 
 typedef struct image_s {
-    int width, height, stride;
+    int x, y, width, height, stride;
     unsigned char *buffer;      // RGB24
 } image_t;
 
-image_t blendBitmapData(ASS_Image *img, int width, int height);
+image_t blendBitmapData(ASS_Image *img);
+
 #endif /* LibassBlendImage_h */
 
 
