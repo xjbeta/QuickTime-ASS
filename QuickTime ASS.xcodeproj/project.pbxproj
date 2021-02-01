@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0128F8E325BA567F00B3E674 /* QTPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0128F8E225BA567F00B3E674 /* QTPlayer.swift */; };
+		0183DE4E25C1344200EA4C41 /* ASSShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 0183DE4D25C1344200EA4C41 /* ASSShaders.metal */; };
+		018A78E925C7A50300319632 /* ASSShaderTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018A78E825C7A50300319632 /* ASSShaderTypes.swift */; };
 		0198EA0A25BBC961002D0B2A /* AXSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0198EA0825BBC961002D0B2A /* AXSwift.framework */; };
 		0198EA0B25BBC96D002D0B2A /* AXSwift.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 0198EA0825BBC961002D0B2A /* AXSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		01A588C825B9351400B3C164 /* QuickTime Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A588C725B9351400B3C164 /* QuickTime Player.swift */; };
@@ -57,6 +59,8 @@
 
 /* Begin PBXFileReference section */
 		0128F8E225BA567F00B3E674 /* QTPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QTPlayer.swift; sourceTree = "<group>"; };
+		0183DE4D25C1344200EA4C41 /* ASSShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = ASSShaders.metal; sourceTree = "<group>"; };
+		018A78E825C7A50300319632 /* ASSShaderTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASSShaderTypes.swift; sourceTree = "<group>"; };
 		0198EA0725BBC961002D0B2A /* AXSwift.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = AXSwift.framework.dSYM; path = Carthage/Build/Mac/AXSwift.framework.dSYM; sourceTree = "<group>"; };
 		0198EA0825BBC961002D0B2A /* AXSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AXSwift.framework; path = Carthage/Build/Mac/AXSwift.framework; sourceTree = "<group>"; };
 		01A588C725B9351400B3C164 /* QuickTime Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "QuickTime Player.swift"; sourceTree = "<group>"; };
@@ -156,6 +160,8 @@
 				01E64E7725B54CFA00BF1AE3 /* Libass.swift */,
 				01E64E7825B54CFA00BF1AE3 /* LibassBlendImage.c */,
 				01E64E7925B54CFA00BF1AE3 /* LibassBlendImage.h */,
+				0183DE4D25C1344200EA4C41 /* ASSShaders.metal */,
+				018A78E825C7A50300319632 /* ASSShaderTypes.swift */,
 			);
 			path = libass;
 			sourceTree = "<group>";
@@ -245,7 +251,9 @@
 				01E64E7A25B54CFA00BF1AE3 /* Libass.swift in Sources */,
 				01E64E7B25B54CFA00BF1AE3 /* LibassBlendImage.c in Sources */,
 				01A588C825B9351400B3C164 /* QuickTime Player.swift in Sources */,
+				018A78E925C7A50300319632 /* ASSShaderTypes.swift in Sources */,
 				01E64E5A25B549C900BF1AE3 /* MainViewController.swift in Sources */,
+				0183DE4E25C1344200EA4C41 /* ASSShaders.metal in Sources */,
 				01E64E8325B57CDF00BF1AE3 /* PointerExtension.swift in Sources */,
 				01E64EAD25B855B800BF1AE3 /* NotificationNames.swift in Sources */,
 				01E64E5825B549C900BF1AE3 /* AppDelegate.swift in Sources */,
