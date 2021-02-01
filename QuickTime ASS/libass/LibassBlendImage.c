@@ -42,13 +42,11 @@ static void blend_single(image_t * frame, ASS_Image *img)
             unsigned k = ((unsigned) src[x]) * opacity / 255;
             // possible endianness problems
             int s = x * 4;
-            
-            if (dst[s] == 0) {
-                dst[s] = k;
-            }
-            dst[s + 1] = (k * b + (255 - k) * dst[s + 1]) / 255;
-            dst[s + 2] = (k * g + (255 - k) * dst[s + 2]) / 255;
-            dst[s + 3] = (k * r + (255 - k) * dst[s + 3]) / 255;
+            // BGRA
+            dst[s] = (k * b) / 255;
+            dst[s + 1] = (k * g) / 255;
+            dst[s + 2] = (k * r) / 255;
+            dst[s + 3] = k;
         }
         src += img->stride;
         dst += frame->stride;
