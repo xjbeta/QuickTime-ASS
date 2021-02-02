@@ -26,3 +26,7 @@ enum ASSVertexInputIndex: Int {
     case Vertices = 0
     case ViewporSize = 1
 }
+
+enum ASSTextureIndex: Int {
+    case BaseColor = 0
+}

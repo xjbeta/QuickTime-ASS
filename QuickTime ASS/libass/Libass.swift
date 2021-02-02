@@ -8,7 +8,13 @@
 
 import Cocoa
 import CoreGraphics
-//import SwiftImage
+
+struct ASSImageObject {
+    let origin: NSPoint
+    let size: NSSize
+    let buffer: UnsafeMutablePointer<UInt8>
+    let image: CGImage
+}
 
 class Libass: NSObject {
     let assLibrary: OpaquePointer
@@ -57,22 +63,48 @@ class Libass: NSObject {
         ass_set_style_overrides(assLibrary, nil)
     }
     
-    func generateImage(_ millisecond: Int64) -> CGImage? {
-        guard let t = track else { return nil }
+    func processForceStyle() {
+        ass_process_force_style(track)
+    }
+    
+    func setFontScale() {
+        ass_set_font_scale(assLibrary, 1)
+    }
+    
+    func generateImage(_ millisecond: Int64) -> [ASSImageObject] {
+        guard let t = track else { return [] }
         
         var changed: Int32 = 1
         let image = ass_render_frame(assRenderer, t, millisecond, &changed)
         
-        guard changed == 2 else { return nil }
+        guard changed == 2 else { return [] }
         
-        let img = blendBitmapData(image, Int32(size.width), Int32(size.height))
         
-        let width = Int(img.width)
-        let height = Int(img.height)
-        
+        var images = [UnsafeMutablePointer<ASS_Image>]()
+        var img = image
+        while img != nil {
+            if let i = img {
+                images.append(i)
+                img = i.pointee.next
+            } else {
+                img = nil
+            }
+        }
+
+        return images.map {
+            blendBitmapData($0)
+        }.compactMap {
+            convertToCGImage($0)
+        }
+    }
+    
+    func convertToCGImage(_ img: image_t) -> ASSImageObject? {
         guard let imageDataPointer = img.buffer else {
             return nil
         }
+        let width = Int(img.width)
+        let height = Int(img.height)
+        
         
         let colorSpaceRef = CGColorSpaceCreateDeviceRGB()
         
@@ -82,27 +114,29 @@ class Libass: NSObject {
         let bytesPerRow = bytesPerPixel * width
         let totalBytes = height * bytesPerRow
         
-        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.first.rawValue)
+        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.last.rawValue)
         
-        
-        guard let providerRef = CGDataProvider(dataInfo: nil, data: imageDataPointer, size: totalBytes, releaseData: {_,_,_ in}) else {
+        guard let providerRef = CGDataProvider(dataInfo: nil, data: imageDataPointer, size: totalBytes, releaseData: {_,_,_ in}),
+              let imageRef = CGImage(width: width,
+                                     height: height,
+                                     bitsPerComponent: bitsPerComponent,
+                                     bitsPerPixel: bitsPerPixel,
+                                     bytesPerRow: bytesPerRow,
+                                     space: colorSpaceRef,
+                                     bitmapInfo: bitmapInfo,
+                                     provider: providerRef,
+                                     decode: nil,
+                                     shouldInterpolate: false,
+                                     intent: .defaultIntent) else {
             return nil
         }
         
-        let imageRef = CGImage(width: width,
-                               height: height,
-                               bitsPerComponent: bitsPerComponent,
-                               bitsPerPixel: bitsPerPixel,
-                               bytesPerRow: bytesPerRow,
-                               space: colorSpaceRef,
-                               bitmapInfo: bitmapInfo,
-                               provider: providerRef,
-                               decode: nil,
-                               shouldInterpolate: false,
-                               intent: .defaultIntent)
-        return imageRef
+        return .init(
+            origin: .init(x: Int(img.x), y: Int(img.y)),
+            size: .init(width: Int(img.width), height: Int(img.height)),
+            buffer: imageDataPointer,
+            image: imageRef)
     }
-    
     
     
     deinit {

@@ -75,9 +75,9 @@ class MainWindowController: NSWindowController {
             size.width *= scale
             size.height *= scale
             self.mainVC?.libass = Libass(size: size)
-            self.mainVC?.imageView.image = nil
+//            self.mainVC?.imageView.image = nil
             self.mainVC?.libass?.setFile(url)
-            self.mainVC?.initTimer()
+//            self.mainVC?.initTimer()
         }
     }
     
@@ -109,7 +109,8 @@ class MainWindowController: NSWindowController {
                           let p = playing else { return }
                     self.playing = p
                 case .valueChanged where try element.attribute(.description) == "timeline":
-                    self.mainVC?.updateSubtitle()
+//                    self.mainVC?.updateSubtitle()
+                break
                 default:
                     break
                 }
@@ -179,9 +180,9 @@ class MainWindowController: NSWindowController {
     }
     
     func updateImageSize(_ rect: NSRect) {
-        guard let vc = mainVC,
-              let image = vc.currentCGImage else { return }
-        vc.imageView.image = NSImage(cgImage: image, size: rect.size)
+//        guard let vc = mainVC,
+//              let image = vc.currentCGImage else { return }
+//        vc.imageView.image = NSImage(cgImage: image, size: rect.size)
     }
     
     func updateTimerState() {
@@ -189,9 +190,9 @@ class MainWindowController: NSWindowController {
         print("isPlaying \(playing)", "windowInFront \(windowInFront)")
         
         if !playing || !windowInFront {
-            vc.suspendTimer()
+//            vc.suspendTimer()
         } else {
-            vc.suspendTimer(false)
+//            vc.suspendTimer(false)
         }
     }
     
