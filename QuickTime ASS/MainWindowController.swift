@@ -66,18 +66,15 @@ class MainWindowController: NSWindowController {
             self.resizeWindow()
             self.setObserver(info.processIdentifier)
             
-            guard var size = targeWindow.bounds?.size,
-                  let scale = NSScreen.main?.backingScaleFactor else {
+            guard let vc = self.mainVC else {
                 print("load subtitle failed, not player info window or screen scale.")
                 return
             }
             
-            size.width *= scale
-            size.height *= scale
-            self.mainVC?.libass = Libass(size: size)
-//            self.mainVC?.imageView.image = nil
-            self.mainVC?.libass?.setFile(url)
-//            self.mainVC?.initTimer()
+            let size = vc.mtkView.drawableSize
+            vc.libass = Libass(size: size)
+            vc.mtkView.isPaused = true
+            vc.libass?.setFile(url)
         }
     }
     
@@ -109,8 +106,7 @@ class MainWindowController: NSWindowController {
                           let p = playing else { return }
                     self.playing = p
                 case .valueChanged where try element.attribute(.description) == "timeline":
-//                    self.mainVC?.updateSubtitle()
-                break
+                    self.mainVC?.updateSubtitle()
                 default:
                     break
                 }
@@ -157,8 +153,8 @@ class MainWindowController: NSWindowController {
 
         if !w.isVisible || !w.isOnActiveSpace {
             w.orderFront(self)
-            windowInFront = true
         }
+        windowInFront = true
     }
     
     func resizeWindowAX(_ rect: NSRect) {
@@ -187,13 +183,8 @@ class MainWindowController: NSWindowController {
     
     func updateTimerState() {
         guard let vc = mainVC else { return }
-        print("isPlaying \(playing)", "windowInFront \(windowInFront)")
-        
-        if !playing || !windowInFront {
-//            vc.suspendTimer()
-        } else {
-//            vc.suspendTimer(false)
-        }
+        vc.mtkView.isPaused = !playing || !windowInFront
+        print("mtkViewisPaused \(vc.mtkView.isPaused)", "isPlaying \(playing)", "windowInFront \(windowInFront)")
     }
     
 }
