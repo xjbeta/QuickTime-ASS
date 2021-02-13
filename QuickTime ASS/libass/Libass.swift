@@ -72,8 +72,7 @@ class Libass: NSObject {
         
         guard changed == 2 else { return nil }
         
-        return blendBitmapData(image)
-        
+        return blendBitmapData(image, Int32(size.width), Int32(size.height))
     }
     
     

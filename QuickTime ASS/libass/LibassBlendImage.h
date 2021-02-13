@@ -17,7 +17,7 @@ typedef struct image_s {
     unsigned char *buffer;      // RGB24
 } image_t;
 
-image_t blendBitmapData(ASS_Image *img);
+image_t blendBitmapData(ASS_Image *img, int width, int height);
 
 #endif /* LibassBlendImage_h */
 
