@@ -9,13 +9,6 @@
 import Cocoa
 import CoreGraphics
 
-struct ASSImageObject {
-    let origin: NSPoint
-    let size: NSSize
-    let buffer: UnsafeMutablePointer<UInt8>
-    let image: CGImage
-}
-
 class Libass: NSObject {
     let assLibrary: OpaquePointer
     let assRenderer: OpaquePointer
@@ -68,55 +61,34 @@ class Libass: NSObject {
     }
     
     func setFontScale() {
-        ass_set_font_scale(assLibrary, 1)
+        ass_set_font_scale(assRenderer, 1)
     }
     
-    func generateImage(_ millisecond: Int64) -> [ASSImageObject] {
-        guard let t = track else { return [] }
-        
+    
+    func generateImage(_ millisecond: Int64) -> image_t? {
+        guard let t = track else { return nil }
         var changed: Int32 = 1
         let image = ass_render_frame(assRenderer, t, millisecond, &changed)
         
-        guard changed == 2 else { return [] }
+        guard changed == 2 else { return nil }
         
+        return blendBitmapData(image)
         
-        var images = [UnsafeMutablePointer<ASS_Image>]()
-        var img = image
-        while img != nil {
-            if let i = img {
-                images.append(i)
-                img = i.pointee.next
-            } else {
-                img = nil
-            }
-        }
-
-        return images.map {
-            blendBitmapData($0)
-        }.compactMap {
-            convertToCGImage($0)
-        }
     }
     
-    func convertToCGImage(_ img: image_t) -> ASSImageObject? {
-        guard let imageDataPointer = img.buffer else {
-            return nil
-        }
-        let width = Int(img.width)
-        let height = Int(img.height)
-        
-        
+    
+    func initCGImage(_ data: UnsafeRawPointer, width: Int, height: Int) -> CGImage? {
         let colorSpaceRef = CGColorSpaceCreateDeviceRGB()
-        
+
         let bitsPerComponent = 8
         let bytesPerPixel = 4
         let bitsPerPixel = bytesPerPixel * bitsPerComponent
         let bytesPerRow = bytesPerPixel * width
         let totalBytes = height * bytesPerRow
-        
+
         let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.last.rawValue)
-        
-        guard let providerRef = CGDataProvider(dataInfo: nil, data: imageDataPointer, size: totalBytes, releaseData: {_,_,_ in}),
+
+        guard let providerRef = CGDataProvider(dataInfo: nil, data: data, size: totalBytes, releaseData: {_,_,_ in}),
               let imageRef = CGImage(width: width,
                                      height: height,
                                      bitsPerComponent: bitsPerComponent,
@@ -131,11 +103,7 @@ class Libass: NSObject {
             return nil
         }
         
-        return .init(
-            origin: .init(x: Int(img.x), y: Int(img.y)),
-            size: .init(width: Int(img.width), height: Int(img.height)),
-            buffer: imageDataPointer,
-            image: imageRef)
+        return imageRef
     }
     
     
