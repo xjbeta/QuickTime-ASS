@@ -718,18 +718,18 @@
                                 <color key="fillColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </box>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="2h8-n1-CBz" customClass="MTKView">
-                                <rect key="frame" x="5" y="5" width="490" height="310"/>
+                                <rect key="frame" x="0.0" y="0.0" width="500" height="320"/>
                             </customView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="5DP-fU-kG2" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="D9d-cF-usI"/>
-                            <constraint firstAttribute="trailing" secondItem="2h8-n1-CBz" secondAttribute="trailing" constant="5" id="SJC-q7-M4F"/>
-                            <constraint firstAttribute="bottom" secondItem="2h8-n1-CBz" secondAttribute="bottom" constant="5" id="Shx-Pz-fvc"/>
+                            <constraint firstAttribute="trailing" secondItem="2h8-n1-CBz" secondAttribute="trailing" id="SJC-q7-M4F"/>
+                            <constraint firstAttribute="bottom" secondItem="2h8-n1-CBz" secondAttribute="bottom" id="Shx-Pz-fvc"/>
                             <constraint firstAttribute="trailing" secondItem="5DP-fU-kG2" secondAttribute="trailing" id="bvC-0r-viq"/>
                             <constraint firstItem="5DP-fU-kG2" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="cVw-j5-TGt"/>
-                            <constraint firstItem="2h8-n1-CBz" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="5" id="fGd-Uj-uGO"/>
+                            <constraint firstItem="2h8-n1-CBz" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="fGd-Uj-uGO"/>
                             <constraint firstAttribute="bottom" secondItem="5DP-fU-kG2" secondAttribute="bottom" id="h6A-fH-wN1"/>
-                            <constraint firstItem="2h8-n1-CBz" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="5" id="tN1-Wk-TtB"/>
+                            <constraint firstItem="2h8-n1-CBz" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="tN1-Wk-TtB"/>
                         </constraints>
                     </view>
                     <connections>
