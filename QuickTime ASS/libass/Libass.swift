@@ -72,7 +72,11 @@ class Libass: NSObject {
         
         guard changed == 2 else { return nil }
         
-        return blendBitmapData(image, Int32(size.width), Int32(size.height))
+        let date = Date()
+        let re = blendBitmapData(image, Int32(size.width), Int32(size.height))
+        print(date.timeIntervalSinceNow)
+        
+        return re
     }
     
     
