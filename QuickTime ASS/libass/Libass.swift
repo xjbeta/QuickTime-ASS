@@ -8,13 +8,12 @@
 
 import Cocoa
 import CoreGraphics
-//import SwiftImage
 
 class Libass: NSObject {
     let assLibrary: OpaquePointer
     let assRenderer: OpaquePointer
     var track: UnsafeMutablePointer<ASS_Track>?
-    let size: CGSize
+    var size: CGSize
     
     init(size: CGSize) {
         assLibrary = ass_library_init()
@@ -48,6 +47,12 @@ class Libass: NSObject {
                               nil)
     }
     
+    func setSize(_ size: CGSize) {
+        ass_set_frame_size(assRenderer, Int32(size.width), Int32(size.height))
+        ass_set_storage_size(assRenderer, Int32(size.width), Int32(size.height))
+        self.size = size
+    }
+    
     func setFontDir(_ path: String) {
         ass_set_fonts_dir(assLibrary, path.cString())
         
@@ -57,52 +62,58 @@ class Libass: NSObject {
         ass_set_style_overrides(assLibrary, nil)
     }
     
-    func generateImage(_ millisecond: Int64) -> CGImage? {
+    func processForceStyle() {
+        ass_process_force_style(track)
+    }
+    
+    func setFontScale() {
+        ass_set_font_scale(assRenderer, 1)
+    }
+    
+    
+    func generateImage(_ millisecond: Int64) -> image_t? {
         guard let t = track else { return nil }
-        
         var changed: Int32 = 1
         let image = ass_render_frame(assRenderer, t, millisecond, &changed)
         
         guard changed == 2 else { return nil }
         
-        let img = blendBitmapData(image, Int32(size.width), Int32(size.height))
+        let date = Date()
+        let re = blendBitmapData(image, Int32(size.width), Int32(size.height))
+        print(date.timeIntervalSinceNow)
         
-        let width = Int(img.width)
-        let height = Int(img.height)
-        
-        guard let imageDataPointer = img.buffer else {
-            return nil
-        }
-        
+        return re
+    }
+    
+    
+    func initCGImage(_ data: UnsafeRawPointer, width: Int, height: Int) -> CGImage? {
         let colorSpaceRef = CGColorSpaceCreateDeviceRGB()
-        
+
         let bitsPerComponent = 8
         let bytesPerPixel = 4
         let bitsPerPixel = bytesPerPixel * bitsPerComponent
         let bytesPerRow = bytesPerPixel * width
         let totalBytes = height * bytesPerRow
-        
-        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.first.rawValue)
-        
-        
-        guard let providerRef = CGDataProvider(dataInfo: nil, data: imageDataPointer, size: totalBytes, releaseData: {_,_,_ in}) else {
+
+        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.last.rawValue)
+
+        guard let providerRef = CGDataProvider(dataInfo: nil, data: data, size: totalBytes, releaseData: {_,_,_ in}),
+              let imageRef = CGImage(width: width,
+                                     height: height,
+                                     bitsPerComponent: bitsPerComponent,
+                                     bitsPerPixel: bitsPerPixel,
+                                     bytesPerRow: bytesPerRow,
+                                     space: colorSpaceRef,
+                                     bitmapInfo: bitmapInfo,
+                                     provider: providerRef,
+                                     decode: nil,
+                                     shouldInterpolate: false,
+                                     intent: .defaultIntent) else {
             return nil
         }
         
-        let imageRef = CGImage(width: width,
-                               height: height,
-                               bitsPerComponent: bitsPerComponent,
-                               bitsPerPixel: bitsPerPixel,
-                               bytesPerRow: bytesPerRow,
-                               space: colorSpaceRef,
-                               bitmapInfo: bitmapInfo,
-                               provider: providerRef,
-                               decode: nil,
-                               shouldInterpolate: false,
-                               intent: .defaultIntent)
         return imageRef
     }
-    
     
     
     deinit {
