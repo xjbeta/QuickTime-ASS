@@ -13,7 +13,7 @@ class Libass: NSObject {
     let assLibrary: OpaquePointer
     let assRenderer: OpaquePointer
     var track: UnsafeMutablePointer<ASS_Track>?
-    let size: CGSize
+    var size: CGSize
     
     init(size: CGSize) {
         assLibrary = ass_library_init()
@@ -45,6 +45,12 @@ class Libass: NSObject {
         track = ass_read_file(assLibrary,
                               UnsafeMutablePointer<Int8>(mutating: path.cString()),
                               nil)
+    }
+    
+    func setSize(_ size: CGSize) {
+        ass_set_frame_size(assRenderer, Int32(size.width), Int32(size.height))
+        ass_set_storage_size(assRenderer, Int32(size.width), Int32(size.height))
+        self.size = size
     }
     
     func setFontDir(_ path: String) {

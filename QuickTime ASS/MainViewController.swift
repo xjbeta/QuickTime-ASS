@@ -123,6 +123,8 @@ extension MainViewController: MTKViewDelegate {
             bottomRight,
             topLeft,
             topRight]
+        
+        libass?.setSize(size)
     }
     
     func draw(in view: MTKView) {
