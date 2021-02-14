@@ -54,6 +54,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
 
         menu.addItem(NSMenuItem.separator())
+        
+        menu.addItem(NSMenuItem(title: "Preferences...", action: #selector(preferences), keyEquivalent: ","))
+        
         menu.addItem(NSMenuItem(title: "Quit", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q"))
         
         statusItem.menu = menu
@@ -68,6 +71,10 @@ extension AppDelegate: NSMenuDelegate, NSMenuItemValidation {
         let info = player.frontmostAppInfo()
         if menuItem.action == #selector(selectSubtitle) {
             return info.bundleIdentifier == player.quickTimeIdentifier
+        }
+        
+        if menuItem.action == #selector(preferences) {
+            return true
         }
         
         return false
@@ -97,6 +104,11 @@ extension AppDelegate: NSMenuDelegate, NSMenuItemValidation {
             name: .loadNewSubtilte,
             object: nil,
             userInfo: ["url": url.path, "info": info])
+    }
+    
+    @objc func preferences() {
+        
+        print(#function)
     }
     
     func acquirePrivileges(_ block: @escaping (Bool) -> Void) {
