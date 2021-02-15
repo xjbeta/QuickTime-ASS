@@ -107,8 +107,7 @@ extension AppDelegate: NSMenuDelegate, NSMenuItemValidation {
     }
     
     @objc func preferences() {
-        
-        print(#function)
+        NotificationCenter.default.post(name: .preferences, object: nil)
     }
     
     func acquirePrivileges(_ block: @escaping (Bool) -> Void) {

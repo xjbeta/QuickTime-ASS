@@ -11,6 +11,9 @@ import MetalKit
 
 class MainViewController: NSViewController {
     
+    @IBOutlet var sidebar: NSView!
+    @IBOutlet var sidebarLayoutConstraint: NSLayoutConstraint!
+    
     @IBOutlet var mtkView: MTKView!
     @IBOutlet var debugBox: NSBox!
     
@@ -40,6 +43,10 @@ class MainViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(forName: .preferences, object: nil, queue: .main) { _ in
+            self.showPreferences()
+        }
         
         mtkView.preferredFramesPerSecond = 30
         mtkView.delegate = self
@@ -84,6 +91,20 @@ class MainViewController: NSViewController {
     
     func updateSubtitle() {
         draw(in: mtkView)
+    }
+    
+    func showPreferences() {
+        let hidden = sidebar.isHidden
+        
+        sidebar.isHidden = false
+        NSAnimationContext.runAnimationGroup { context in
+            context.duration = 0.25
+            sidebarLayoutConstraint.animator().constant = hidden ? 0 : -sidebar.frame.width
+        } completionHandler: {
+            if !hidden {
+                self.sidebar.isHidden = true
+            }
+        }
     }
     
 }
