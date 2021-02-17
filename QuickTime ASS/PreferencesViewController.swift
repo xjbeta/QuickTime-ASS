@@ -44,6 +44,8 @@ class PreferencesViewController: NSViewController {
         case positionSlider:
             let v = sender.integerValue
             positionTextField.stringValue = "\(v)"
+            
+            vc.position = v
         default:
             break
         }

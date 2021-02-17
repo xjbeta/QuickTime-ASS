@@ -736,11 +736,11 @@
                         <constraints>
                             <constraint firstItem="Ztc-42-ELG" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="CRt-rs-Hwd"/>
                             <constraint firstItem="5DP-fU-kG2" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="D9d-cF-usI"/>
+                            <constraint firstItem="2h8-n1-CBz" firstAttribute="height" secondItem="m2S-Jp-Qdl" secondAttribute="height" id="JVw-RQ-mSR"/>
                             <constraint firstAttribute="trailing" secondItem="Ztc-42-ELG" secondAttribute="trailing" constant="-325" id="OiD-8W-MT1"/>
-                            <constraint firstAttribute="trailing" secondItem="2h8-n1-CBz" secondAttribute="trailing" id="SJC-q7-M4F"/>
-                            <constraint firstAttribute="bottom" secondItem="2h8-n1-CBz" secondAttribute="bottom" id="Shx-Pz-fvc"/>
                             <constraint firstAttribute="trailing" secondItem="5DP-fU-kG2" secondAttribute="trailing" id="bvC-0r-viq"/>
                             <constraint firstItem="5DP-fU-kG2" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="cVw-j5-TGt"/>
+                            <constraint firstItem="2h8-n1-CBz" firstAttribute="width" secondItem="m2S-Jp-Qdl" secondAttribute="width" id="efx-dA-rVy"/>
                             <constraint firstItem="2h8-n1-CBz" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="fGd-Uj-uGO"/>
                             <constraint firstAttribute="bottom" secondItem="5DP-fU-kG2" secondAttribute="bottom" id="h6A-fH-wN1"/>
                             <constraint firstAttribute="bottom" secondItem="Ztc-42-ELG" secondAttribute="bottom" id="my6-fw-EA0"/>
@@ -750,6 +750,7 @@
                     <connections>
                         <outlet property="debugBox" destination="5DP-fU-kG2" id="5pC-qv-cYm"/>
                         <outlet property="mtkView" destination="2h8-n1-CBz" id="zVt-pY-4tV"/>
+                        <outlet property="mtkViewTopLC" destination="fGd-Uj-uGO" id="DH2-yF-pKa"/>
                         <outlet property="sidebar" destination="Ztc-42-ELG" id="Y24-wd-0AD"/>
                         <outlet property="sidebarLayoutConstraint" destination="OiD-8W-MT1" id="PjJ-yZ-hvb"/>
                     </connections>
@@ -798,7 +799,7 @@
                                                             <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pXs-Iz-Bg6">
                                                                 <rect key="frame" x="-2" y="142" width="77" height="16"/>
                                                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Delay:" id="CNZ-Zf-AF0">
-                                                                    <font key="font" usesAppearanceFont="YES"/>
+                                                                    <font key="font" metaFont="systemMedium" size="13"/>
                                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 </textFieldCell>
@@ -873,7 +874,7 @@
                                                             <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RWz-Bs-n0r">
                                                                 <rect key="frame" x="-2" y="74" width="77" height="16"/>
                                                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Scale:" id="8h4-Wk-1Hm">
-                                                                    <font key="font" usesAppearanceFont="YES"/>
+                                                                    <font key="font" metaFont="systemMedium" size="13"/>
                                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 </textFieldCell>
@@ -905,7 +906,7 @@
                                                             <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="waw-Nb-NRv">
                                                                 <rect key="frame" x="-2" y="26" width="77" height="16"/>
                                                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Position:" id="xlE-xb-i92">
-                                                                    <font key="font" usesAppearanceFont="YES"/>
+                                                                    <font key="font" metaFont="systemMedium" size="13"/>
                                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 </textFieldCell>
@@ -916,7 +917,7 @@
                                                         <gridCell row="E2J-Cm-6nc" column="UnE-9L-OtR" headOfMergedCell="4iK-90-gp8" id="4iK-90-gp8">
                                                             <slider key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Sh7-GD-9nV">
                                                                 <rect key="frame" x="-2" y="-6" width="236" height="28"/>
-                                                                <sliderCell key="cell" continuous="YES" state="on" alignment="left" minValue="-100" maxValue="100" tickMarkPosition="above" numberOfTickMarks="1" sliderType="linear" id="an5-jh-Jbs"/>
+                                                                <sliderCell key="cell" continuous="YES" state="on" alignment="left" minValue="-250" maxValue="250" tickMarkPosition="above" numberOfTickMarks="1" sliderType="linear" id="an5-jh-Jbs"/>
                                                                 <connections>
                                                                     <action selector="sliderAction:" target="aLF-2k-ZI3" id="PXP-TM-6XI"/>
                                                                 </connections>

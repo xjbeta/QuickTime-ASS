@@ -14,6 +14,7 @@ class MainViewController: NSViewController {
     @IBOutlet var sidebar: NSView!
     @IBOutlet var sidebarLayoutConstraint: NSLayoutConstraint!
     
+    @IBOutlet var mtkViewTopLC: NSLayoutConstraint!
     @IBOutlet var mtkView: MTKView!
     @IBOutlet var debugBox: NSBox!
     
@@ -33,6 +34,12 @@ class MainViewController: NSViewController {
     var subtitleDaily: Int64 = 0 {
         didSet {
             mtkView.draw()
+        }
+    }
+    
+    var position: Int = 0 {
+        didSet {
+            mtkViewTopLC.constant = CGFloat(-position)
         }
     }
     
