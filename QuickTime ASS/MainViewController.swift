@@ -24,6 +24,7 @@ class MainViewController: NSViewController {
     var commandQueue: MTLCommandQueue!
     var defaultLibrary: MTLLibrary!
     var textureDescriptor: MTLTextureDescriptor!
+    var texture: MTLTexture!
     
     var viewPortSize = vector_uint2.zero
     var vertexs = [ASSVertex]()
@@ -61,16 +62,19 @@ class MainViewController: NSViewController {
             self.showPreferences()
         }
         
+        device = MTLCreateSystemDefaultDevice()
+        mtkView.device = device
+        
         mtkView.preferredFramesPerSecond = 30
         mtkView.delegate = self
         mtkView.layer?.isOpaque = false
+        
         textureDescriptor = MTLTextureDescriptor()
         textureDescriptor.pixelFormat = .bgra8Unorm
+        texture = device.makeTexture(descriptor: textureDescriptor)
         
         mtkView(mtkView, drawableSizeWillChange: mtkView.drawableSize)
-        
-        device = MTLCreateSystemDefaultDevice()
-        mtkView.device = device
+
         
         defaultLibrary = device.makeDefaultLibrary()
         let vertexFunction = defaultLibrary.makeFunction(name: "vertexShader")
@@ -109,6 +113,14 @@ class MainViewController: NSViewController {
     func showPreferences() {
         let hidden = sidebar.isHidden
         
+        guard let window = self.mainWC?.window else {
+            return
+        }
+        
+        window.ignoresMouseEvents = !hidden
+
+        window.makeKeyAndOrderFront(self)
+        
         sidebar.isHidden = false
         NSAnimationContext.runAnimationGroup { context in
             context.duration = 0.25
@@ -130,47 +142,25 @@ extension MainViewController: MTKViewDelegate {
         textureDescriptor.width = Int(viewPortSize.x)
         textureDescriptor.height = Int(viewPortSize.y)
         
-        let hw = Float(size.width / 2)
-        let hh = Float(size.height / 2)
-        
-        let topLeft = ASSVertex(
-            (-hw, hh),
-            (0.0, 0.0))
-        
-        let topRight = ASSVertex(
-            (hw, hh),
-            (1.0, 0.0))
-        
-        let bottomLeft = ASSVertex(
-            (-hw, -hh),
-            (0.0, 1.0))
-        let bottomRight = ASSVertex(
-            (hw, -hh),
-            (1.0, 1.0))
-        
-        
-        vertexs = [
-            bottomRight,
-            bottomLeft,
-            topLeft,
-            
-            bottomRight,
-            topLeft,
-            topRight]
+        texture = device.makeTexture(descriptor: textureDescriptor)
+        updateVertexs()
         
         libass?.setSize(size)
     }
     
     func draw(in view: MTKView) {
-        
+        loadNewASSImage()
+        drawTexture(in: view)
+    }
+    
+    func loadNewASSImage() {
         guard let wc = mainWC,
               let cTime = wc.targePlayerWindow?.document?.currentTime else { return }
         
         let time = Int64(cTime * 1000) + subtitleDaily
         
         guard lastRequestTime != time,
-              let image = libass?.generateImage(time),
-              let texture = device.makeTexture(descriptor: textureDescriptor) else { return }
+              let image = libass?.generateImage(time) else { return }
         
         let bytesPerRow = Int(viewPortSize.x * 4)
         
@@ -188,7 +178,9 @@ extension MainViewController: MTKViewDelegate {
         image.buffer.deallocate()
         
         lastRequestTime = time
-        
+    }
+    
+    func drawTexture(in view: MTKView) {
         guard let commandBuffer = commandQueue.makeCommandBuffer(),
               let renderPassDescriptor = view.currentRenderPassDescriptor,
               let commandEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor),
@@ -223,5 +215,35 @@ extension MainViewController: MTKViewDelegate {
         commandEncoder.endEncoding()
         commandBuffer.present(drawable)
         commandBuffer.commit()
+    }
+    
+    func updateVertexs() {
+        let hw = Float(viewPortSize.x / 2)
+        let hh = Float(viewPortSize.y / 2)
+        
+        let topLeft = ASSVertex(
+            (-hw, hh),
+            (0.0, 0.0))
+        
+        let topRight = ASSVertex(
+            (hw, hh),
+            (1.0, 0.0))
+        
+        let bottomLeft = ASSVertex(
+            (-hw, -hh),
+            (0.0, 1.0))
+        let bottomRight = ASSVertex(
+            (hw, -hh),
+            (1.0, 1.0))
+        
+        
+        vertexs = [
+            bottomRight,
+            bottomLeft,
+            topLeft,
+            
+            bottomRight,
+            topLeft,
+            topRight]
     }
 }
