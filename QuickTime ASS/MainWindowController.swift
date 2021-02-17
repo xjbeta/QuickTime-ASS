@@ -49,6 +49,10 @@ class MainWindowController: NSWindowController {
         
         NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(spaceChanged), name: NSWorkspace.activeSpaceDidChangeNotification, object: nil)
         
+        NotificationCenter.default.addObserver(forName: .enableDebug, object: nil, queue: .main) { _ in
+            self.updateDebugView()
+        }
+        
         NotificationCenter.default.addObserver(forName: .loadNewSubtilte, object: nil, queue: .main) {
             guard let uInfo = $0.userInfo as? [String: Any],
                   let url = uInfo["url"] as? String,
@@ -75,7 +79,15 @@ class MainWindowController: NSWindowController {
             vc.libass = Libass(size: size)
             vc.mtkView.isPaused = true
             vc.libass?.setFile(url)
+            self.updateDebugView()
         }
+    }
+    
+    func updateDebugView() {
+        guard let _ = targePlayerWindow else { return }
+        
+        let enableDebug = UserDefaults().bool(forKey: Notification.Name.enableDebug.rawValue)
+        mainVC?.debugBox.isHidden = !enableDebug
     }
     
     @objc func spaceChanged(_ notification: NSNotification) {

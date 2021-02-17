@@ -57,6 +57,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         menu.addItem(NSMenuItem(title: "Preferences...", action: #selector(preferences), keyEquivalent: ","))
         
+        let debugItem = NSMenuItem(title: "Debug", action: #selector(debug), keyEquivalent: "")
+        let enableDebug = UserDefaults().bool(forKey: Notification.Name.enableDebug.rawValue)
+        debugItem.state = enableDebug ? .on : .off
+        menu.addItem(debugItem)
+        
         menu.addItem(NSMenuItem(title: "Quit", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q"))
         
         statusItem.menu = menu
@@ -71,6 +76,10 @@ extension AppDelegate: NSMenuDelegate, NSMenuItemValidation {
         let info = player.frontmostAppInfo()
         if menuItem.action == #selector(selectSubtitle) {
             return info.bundleIdentifier == player.quickTimeIdentifier
+        }
+        
+        if menuItem.action == #selector(debug(_:)) {
+            return true
         }
         
         if menuItem.action == #selector(preferences) {
@@ -108,6 +117,14 @@ extension AppDelegate: NSMenuDelegate, NSMenuItemValidation {
     
     @objc func preferences() {
         NotificationCenter.default.post(name: .preferences, object: nil)
+    }
+    
+    @objc func debug(_ sender: NSMenuItem) {
+        let enableDebug = sender.state == .on
+        sender.state = enableDebug ? .off : .on
+        UserDefaults().set(!enableDebug, forKey: Notification.Name.enableDebug.rawValue)
+        
+        NotificationCenter.default.post(name: .enableDebug, object: nil)
     }
     
     func acquirePrivileges(_ block: @escaping (Bool) -> Void) {
