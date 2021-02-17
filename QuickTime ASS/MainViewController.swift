@@ -57,6 +57,8 @@ class MainViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.layer?.cornerRadius = 10
+        
         
         NotificationCenter.default.addObserver(forName: .preferences, object: nil, queue: .main) { _ in
             self.showPreferences()

@@ -708,7 +708,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="500" height="320"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <box boxType="custom" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="5DP-fU-kG2">
+                            <box boxType="custom" cornerRadius="10" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="5DP-fU-kG2">
                                 <rect key="frame" x="0.0" y="0.0" width="500" height="320"/>
                                 <view key="contentView" id="u6s-Ya-qRM">
                                     <rect key="frame" x="1" y="1" width="498" height="318"/>
