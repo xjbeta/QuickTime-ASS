@@ -79,16 +79,21 @@ class MainWindowController: NSWindowController {
     }
     
     @objc func updateWindowState(_ notification: NSNotification) {
-        guard targePlayerWindow != nil else { return }
-        let info = QTPlayer.shared.frontmostAppInfo()
-        guard info.isQTPlayer else {
-                if let window = window, window.isVisible {
-                    window.orderOut(self)
-                    windowInFront = false
-                }
-                return
+        
+        guard let app = notification.userInfo?["NSWorkspaceApplicationKey"] as? NSRunningApplication,
+              let w = self.window else {
+            return
         }
-        self.resizeWindow()
+        
+        if app.bundleIdentifier == QTPlayer.shared.quickTimeIdentifier {
+            resizeWindow()
+        } else {
+            
+            if w.isVisible {
+                w.orderOut(self)
+                windowInFront = false
+            }
+        }
     }
     
     func setObserver(_ pid: pid_t) {
