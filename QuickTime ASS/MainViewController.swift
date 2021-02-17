@@ -132,6 +132,14 @@ class MainViewController: NSViewController {
         }
     }
     
+
+    override func mouseDown(with event: NSEvent) {
+        let p = sidebar.convert(event.locationInWindow, from: view)
+        if p.x < -5, !sidebar.isHidden {
+            showPreferences()
+        }
+    }
+    
 }
 
 extension MainViewController: MTKViewDelegate {
