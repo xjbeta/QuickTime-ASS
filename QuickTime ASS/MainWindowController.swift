@@ -77,10 +77,15 @@ class MainWindowController: NSWindowController {
             
             let size = vc.mtkView.drawableSize
             vc.libass = Libass(size: size)
-            vc.mtkView.isPaused = true
             vc.libass?.setFile(url)
             self.updateDebugView()
+            self.checkPlayerState()
         }
+    }
+    
+    func checkPlayerState() {
+        guard let playing = targePlayerWindow?.document?.playing else { return }
+        mainVC?.mtkView.isPaused = !playing
     }
     
     func updateDebugView() {
