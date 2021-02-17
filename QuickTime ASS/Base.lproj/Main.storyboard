@@ -778,8 +778,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="310" height="585"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <gridView fixedFrame="YES" xPlacement="leading" yPlacement="bottom" rowAlignment="none" translatesAutoresizingMaskIntoConstraints="NO" id="yZf-nI-jeK">
-                                                    <rect key="frame" x="20" y="338" width="291" height="158"/>
+                                                <gridView xPlacement="leading" yPlacement="bottom" rowAlignment="none" translatesAutoresizingMaskIntoConstraints="NO" id="yZf-nI-jeK">
+                                                    <rect key="frame" x="20" y="367" width="291" height="158"/>
                                                     <rows>
                                                         <gridRow yPlacement="bottom" id="iEF-hx-G1H"/>
                                                         <gridRow yPlacement="center" id="B51-VM-CVs"/>
@@ -937,6 +937,10 @@
                                                     </gridCells>
                                                 </gridView>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="yZf-nI-jeK" firstAttribute="leading" secondItem="iea-IT-I5H" secondAttribute="leading" constant="20" symbolic="YES" id="ObE-Ma-Y32"/>
+                                                <constraint firstItem="yZf-nI-jeK" firstAttribute="top" secondItem="iea-IT-I5H" secondAttribute="top" constant="60" id="dgc-yb-pcv"/>
+                                            </constraints>
                                         </view>
                                     </subviews>
                                     <color key="backgroundColor" name="unemphasizedSelectedContentBackgroundColor" catalog="System" colorSpace="catalog"/>

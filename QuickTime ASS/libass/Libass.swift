@@ -66,8 +66,8 @@ class Libass: NSObject {
         ass_process_force_style(track)
     }
     
-    func setFontScale() {
-        ass_set_font_scale(assRenderer, 1)
+    func setFontScale(_ scale: Double) {
+        ass_set_font_scale(assRenderer, scale)
     }
     
     

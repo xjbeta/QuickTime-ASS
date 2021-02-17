@@ -36,11 +36,15 @@ class PreferencesViewController: NSViewController {
         case scaleSlider:
             var v = sender.doubleValue
             if v > 1 {
-                v *= 2
+                v += ((v - 1) * 2)
             }
             
             let s = String(format: "%.2f", v)
             scaleTextField.stringValue = "\(s)x"
+            
+            vc.libass?.setFontScale(v)
+            vc.lastRequestTime = -1
+            vc.mtkView.draw()
         case positionSlider:
             let v = sender.integerValue
             positionTextField.stringValue = "\(v)"
