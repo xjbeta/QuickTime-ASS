@@ -834,7 +834,7 @@
                                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WQl-sz-fCK">
                                                                         <rect key="frame" x="-2" y="0.0" width="76" height="14"/>
                                                                         <textFieldCell key="cell" lineBreakMode="clipping" title="-5s" id="a2B-CJ-Y4T">
-                                                                            <font key="font" metaFont="system" size="11"/>
+                                                                            <font key="font" metaFont="smallSystem"/>
                                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                         </textFieldCell>
@@ -842,7 +842,7 @@
                                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Fn1-5Z-ese">
                                                                         <rect key="frame" x="78" y="0.0" width="76" height="14"/>
                                                                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="0s" id="le1-8J-ptj">
-                                                                            <font key="font" metaFont="system" size="11"/>
+                                                                            <font key="font" metaFont="smallSystem"/>
                                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                         </textFieldCell>
@@ -850,7 +850,7 @@
                                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="45L-j1-j3F">
                                                                         <rect key="frame" x="158" y="0.0" width="76" height="14"/>
                                                                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="5s" id="OiW-5D-seV">
-                                                                            <font key="font" metaFont="system" size="11"/>
+                                                                            <font key="font" metaFont="smallSystem"/>
                                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                         </textFieldCell>

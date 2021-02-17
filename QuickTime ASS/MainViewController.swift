@@ -114,15 +114,10 @@ class MainViewController: NSViewController {
     
     func showPreferences() {
         let hidden = sidebar.isHidden
-        
         guard let window = self.mainWC?.window else {
             return
         }
-        
-        window.ignoresMouseEvents = !hidden
 
-        window.makeKeyAndOrderFront(self)
-        
         sidebar.isHidden = false
         NSAnimationContext.runAnimationGroup { context in
             context.duration = 0.25
@@ -130,7 +125,10 @@ class MainViewController: NSViewController {
         } completionHandler: {
             if !hidden {
                 self.sidebar.isHidden = true
+            } else {
+                window.makeKey()
             }
+            window.ignoresMouseEvents = !hidden
         }
     }
     

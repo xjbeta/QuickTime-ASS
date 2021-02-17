@@ -85,10 +85,13 @@ class MainWindowController: NSWindowController {
             return
         }
         
+        if app.bundleIdentifier == Bundle.main.bundleIdentifier {
+            return
+        }
+        
         if app.bundleIdentifier == QTPlayer.shared.quickTimeIdentifier {
             resizeWindow()
         } else {
-            
             if w.isVisible {
                 w.orderOut(self)
                 windowInFront = false
