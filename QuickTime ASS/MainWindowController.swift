@@ -47,7 +47,7 @@ class MainWindowController: NSWindowController {
         
         NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(updateWindowState), name: NSWorkspace.didActivateApplicationNotification, object: nil)
         
-        NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(updateWindowState), name: NSWorkspace.activeSpaceDidChangeNotification, object: nil)
+        NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(spaceChanged), name: NSWorkspace.activeSpaceDidChangeNotification, object: nil)
         
         NotificationCenter.default.addObserver(forName: .loadNewSubtilte, object: nil, queue: .main) {
             guard let uInfo = $0.userInfo as? [String: Any],
@@ -77,6 +77,25 @@ class MainWindowController: NSWindowController {
             vc.libass?.setFile(url)
         }
     }
+    
+    @objc func spaceChanged(_ notification: NSNotification) {
+        
+        let info = QTPlayer.shared.frontmostAppInfo()
+        
+        guard let w = self.window else {
+            return
+        }
+        
+        if info.isQTPlayer {
+            resizeWindow()
+        } else {
+            if w.isVisible {
+                w.orderOut(self)
+                windowInFront = false
+            }
+        }
+    }
+    
     
     @objc func updateWindowState(_ notification: NSNotification) {
         
