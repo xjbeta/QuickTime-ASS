@@ -27,11 +27,17 @@ class MainViewController: NSViewController {
     var viewPortSize = vector_uint2.zero
     var vertexs = [ASSVertex]()
     
+    // Libass
     var libass: Libass? = nil
+    var lastRequestTime: Int64 = -1
+    var subtitleDaily: Int64 = 0 {
+        didSet {
+            mtkView.draw()
+        }
+    }
+    
     
     let player = QTPlayer.shared
-    
-    var lastRequestTime: Int64 = -1
 
 
     var mainWC: MainWindowController? {
@@ -153,7 +159,7 @@ extension MainViewController: MTKViewDelegate {
         guard let wc = mainWC,
               let cTime = wc.targePlayerWindow?.document?.currentTime else { return }
         
-        let time = Int64(cTime * 1000)
+        let time = Int64(cTime * 1000) + subtitleDaily
         
         guard lastRequestTime != time,
               let image = libass?.generateImage(time),
