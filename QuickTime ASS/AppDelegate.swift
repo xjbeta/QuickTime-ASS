@@ -7,6 +7,7 @@
 
 import Cocoa
 import ScriptingBridge
+import Sparkle
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -57,6 +58,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         menu.addItem(NSMenuItem(title: "Preferences...", action: #selector(preferences), keyEquivalent: ","))
         
+        menu.addItem(NSMenuItem(title: "Check for Updates...", action: #selector(checkForUpdate), keyEquivalent: ""))
+        
         let debugItem = NSMenuItem(title: "Debug", action: #selector(debug), keyEquivalent: "")
         let enableDebug = UserDefaults().bool(forKey: Notification.Name.enableDebug.rawValue)
         debugItem.state = enableDebug ? .on : .off
@@ -79,6 +82,10 @@ extension AppDelegate: NSMenuDelegate, NSMenuItemValidation {
         }
         
         if menuItem.action == #selector(debug(_:)) {
+            return true
+        }
+        
+        if menuItem.action == #selector(checkForUpdate) {
             return true
         }
         
@@ -117,6 +124,10 @@ extension AppDelegate: NSMenuDelegate, NSMenuItemValidation {
     
     @objc func preferences() {
         NotificationCenter.default.post(name: .preferences, object: nil)
+    }
+    
+    @objc func checkForUpdate(_ sender: NSMenuItem) {
+        SUUpdater().checkForUpdates(sender)
     }
     
     @objc func debug(_ sender: NSMenuItem) {
