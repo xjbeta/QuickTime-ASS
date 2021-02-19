@@ -7,12 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0128F8E325BA567F00B3E674 /* QTPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0128F8E225BA567F00B3E674 /* QTPlayer.swift */; };
+		0183DE4E25C1344200EA4C41 /* ASSShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 0183DE4D25C1344200EA4C41 /* ASSShaders.metal */; };
+		018A78E925C7A50300319632 /* ASSShaderTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018A78E825C7A50300319632 /* ASSShaderTypes.swift */; };
+		0198EA0A25BBC961002D0B2A /* AXSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0198EA0825BBC961002D0B2A /* AXSwift.framework */; };
+		0198EA0B25BBC96D002D0B2A /* AXSwift.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 0198EA0825BBC961002D0B2A /* AXSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		01A588C825B9351400B3C164 /* QuickTime Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A588C725B9351400B3C164 /* QuickTime Player.swift */; };
+		01AB45F725DA42D200B3C796 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AB45F625DA42D200B3C796 /* PreferencesViewController.swift */; };
 		01E64E5825B549C900BF1AE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E64E5725B549C900BF1AE3 /* AppDelegate.swift */; };
-		01E64E5A25B549C900BF1AE3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E64E5925B549C900BF1AE3 /* ViewController.swift */; };
+		01E64E5A25B549C900BF1AE3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E64E5925B549C900BF1AE3 /* MainViewController.swift */; };
 		01E64E5C25B549CC00BF1AE3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01E64E5B25B549CC00BF1AE3 /* Assets.xcassets */; };
 		01E64E5F25B549CC00BF1AE3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01E64E5D25B549CC00BF1AE3 /* Main.storyboard */; };
 		01E64E6D25B54A5900BF1AE3 /* libass.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E64E6C25B54A5900BF1AE3 /* libass.9.dylib */; };
 		01E64E6E25B54A5A00BF1AE3 /* libass.9.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 01E64E6C25B54A5900BF1AE3 /* libass.9.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		01E64E7A25B54CFA00BF1AE3 /* Libass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E64E7725B54CFA00BF1AE3 /* Libass.swift */; };
+		01E64E7B25B54CFA00BF1AE3 /* LibassBlendImage.c in Sources */ = {isa = PBXBuildFile; fileRef = 01E64E7825B54CFA00BF1AE3 /* LibassBlendImage.c */; };
+		01E64E8325B57CDF00BF1AE3 /* PointerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E64E8225B57CDF00BF1AE3 /* PointerExtension.swift */; };
+		01E64E9F25B6C46E00BF1AE3 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 01E64E9E25B6C46E00BF1AE3 /* Cartfile */; };
+		01E64EA525B6C6B600BF1AE3 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E64EA125B6C6B500BF1AE3 /* Sparkle.framework */; };
+		01E64EA925B6C6E700BF1AE3 /* Sparkle.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 01E64EA125B6C6B500BF1AE3 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		01E64EAB25B6E7B300BF1AE3 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E64EAA25B6E7B300BF1AE3 /* MainWindowController.swift */; };
+		01E64EAD25B855B800BF1AE3 /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E64EAC25B855B800BF1AE3 /* NotificationNames.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -22,6 +37,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				0198EA0B25BBC96D002D0B2A /* AXSwift.framework in Embed Libraries */,
+				01E64EA925B6C6E700BF1AE3 /* Sparkle.framework in Embed Libraries */,
 				01E64E6E25B54A5A00BF1AE3 /* libass.9.dylib in Embed Libraries */,
 			);
 			name = "Embed Libraries";
@@ -39,16 +56,32 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0128F8E225BA567F00B3E674 /* QTPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QTPlayer.swift; sourceTree = "<group>"; };
+		0183DE4D25C1344200EA4C41 /* ASSShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = ASSShaders.metal; sourceTree = "<group>"; };
+		018A78E825C7A50300319632 /* ASSShaderTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASSShaderTypes.swift; sourceTree = "<group>"; };
+		0198EA0725BBC961002D0B2A /* AXSwift.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = AXSwift.framework.dSYM; path = Carthage/Build/Mac/AXSwift.framework.dSYM; sourceTree = "<group>"; };
+		0198EA0825BBC961002D0B2A /* AXSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AXSwift.framework; path = Carthage/Build/Mac/AXSwift.framework; sourceTree = "<group>"; };
+		01A588C725B9351400B3C164 /* QuickTime Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "QuickTime Player.swift"; sourceTree = "<group>"; };
+		01A588C925B9356400B3C164 /* QuickTime Player.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QuickTime Player.h"; sourceTree = "<group>"; };
+		01AB45F625DA42D200B3C796 /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		01E64E5425B549C900BF1AE3 /* QuickTime ASS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "QuickTime ASS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		01E64E5725B549C900BF1AE3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		01E64E5925B549C900BF1AE3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		01E64E5925B549C900BF1AE3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		01E64E5B25B549CC00BF1AE3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01E64E5E25B549CC00BF1AE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		01E64E6025B549CC00BF1AE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		01E64E6125B549CC00BF1AE3 /* QuickTime_ASS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QuickTime_ASS.entitlements; sourceTree = "<group>"; };
 		01E64E6825B54A1200BF1AE3 /* libass */ = {isa = PBXFileReference; lastKnownFileType = folder; path = libass; sourceTree = "<group>"; };
 		01E64E6C25B54A5900BF1AE3 /* libass.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libass.9.dylib; path = libass/lib/libass.9.dylib; sourceTree = "<group>"; };
 		01E64E7025B54A8900BF1AE3 /* QuickTime ASS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QuickTime ASS-Bridging-Header.h"; sourceTree = "<group>"; };
+		01E64E7725B54CFA00BF1AE3 /* Libass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Libass.swift; sourceTree = "<group>"; };
+		01E64E7825B54CFA00BF1AE3 /* LibassBlendImage.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = LibassBlendImage.c; sourceTree = "<group>"; };
+		01E64E7925B54CFA00BF1AE3 /* LibassBlendImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibassBlendImage.h; sourceTree = "<group>"; };
+		01E64E8225B57CDF00BF1AE3 /* PointerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointerExtension.swift; sourceTree = "<group>"; };
+		01E64E9E25B6C46E00BF1AE3 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
+		01E64EA125B6C6B500BF1AE3 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Carthage/Build/Mac/Sparkle.framework; sourceTree = "<group>"; };
+		01E64EA325B6C6B500BF1AE3 /* Sparkle.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Sparkle.framework.dSYM; path = Carthage/Build/Mac/Sparkle.framework.dSYM; sourceTree = "<group>"; };
+		01E64EAA25B6E7B300BF1AE3 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainWindowController.swift; path = ../MainWindowController.swift; sourceTree = "<group>"; };
+		01E64EAC25B855B800BF1AE3 /* NotificationNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNames.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,15 +90,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				01E64E6D25B54A5900BF1AE3 /* libass.9.dylib in Frameworks */,
+				01E64EA525B6C6B600BF1AE3 /* Sparkle.framework in Frameworks */,
+				0198EA0A25BBC961002D0B2A /* AXSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		01AB464925DE174200B3C796 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				01E64EAA25B6E7B300BF1AE3 /* MainWindowController.swift */,
+				01E64E5925B549C900BF1AE3 /* MainViewController.swift */,
+				01AB45F625DA42D200B3C796 /* PreferencesViewController.swift */,
+				01E64E5D25B549CC00BF1AE3 /* Main.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		01E64E4B25B549C900BF1AE3 = {
 			isa = PBXGroup;
 			children = (
+				01E64E9E25B6C46E00BF1AE3 /* Cartfile */,
 				01E64E6825B54A1200BF1AE3 /* libass */,
 				01E64E5625B549C900BF1AE3 /* QuickTime ASS */,
 				01E64E5525B549C900BF1AE3 /* Products */,
@@ -84,14 +131,16 @@
 		01E64E5625B549C900BF1AE3 /* QuickTime ASS */ = {
 			isa = PBXGroup;
 			children = (
+				01A588C925B9356400B3C164 /* QuickTime Player.h */,
+				01A588C725B9351400B3C164 /* QuickTime Player.swift */,
+				01E64E8125B57CD500BF1AE3 /* Extensions */,
 				01E64E7625B54CEA00BF1AE3 /* libass */,
+				01AB464925DE174200B3C796 /* Views */,
 				01E64E5725B549C900BF1AE3 /* AppDelegate.swift */,
-				01E64E5925B549C900BF1AE3 /* ViewController.swift */,
 				01E64E5B25B549CC00BF1AE3 /* Assets.xcassets */,
-				01E64E5D25B549CC00BF1AE3 /* Main.storyboard */,
 				01E64E6025B549CC00BF1AE3 /* Info.plist */,
-				01E64E6125B549CC00BF1AE3 /* QuickTime_ASS.entitlements */,
 				01E64E7025B54A8900BF1AE3 /* QuickTime ASS-Bridging-Header.h */,
+				0128F8E225BA567F00B3E674 /* QTPlayer.swift */,
 			);
 			path = "QuickTime ASS";
 			sourceTree = "<group>";
@@ -99,6 +148,10 @@
 		01E64E6B25B54A5900BF1AE3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0198EA0825BBC961002D0B2A /* AXSwift.framework */,
+				0198EA0725BBC961002D0B2A /* AXSwift.framework.dSYM */,
+				01E64EA125B6C6B500BF1AE3 /* Sparkle.framework */,
+				01E64EA325B6C6B500BF1AE3 /* Sparkle.framework.dSYM */,
 				01E64E6C25B54A5900BF1AE3 /* libass.9.dylib */,
 			);
 			name = Frameworks;
@@ -110,8 +163,19 @@
 				01E64E7725B54CFA00BF1AE3 /* Libass.swift */,
 				01E64E7825B54CFA00BF1AE3 /* LibassBlendImage.c */,
 				01E64E7925B54CFA00BF1AE3 /* LibassBlendImage.h */,
+				0183DE4D25C1344200EA4C41 /* ASSShaders.metal */,
+				018A78E825C7A50300319632 /* ASSShaderTypes.swift */,
 			);
 			path = libass;
+			sourceTree = "<group>";
+		};
+		01E64E8125B57CD500BF1AE3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				01E64E8225B57CDF00BF1AE3 /* PointerExtension.swift */,
+				01E64EAC25B855B800BF1AE3 /* NotificationNames.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,7 +207,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1230;
-				LastUpgradeCheck = 1230;
+				LastUpgradeCheck = 1240;
 				TargetAttributes = {
 					01E64E5325B549C900BF1AE3 = {
 						CreatedOnToolsVersion = 12.3;
@@ -174,6 +238,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01E64E9F25B6C46E00BF1AE3 /* Cartfile in Resources */,
 				01E64E5C25B549CC00BF1AE3 /* Assets.xcassets in Resources */,
 				01E64E5F25B549CC00BF1AE3 /* Main.storyboard in Resources */,
 			);
@@ -186,8 +251,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01E64E5A25B549C900BF1AE3 /* ViewController.swift in Sources */,
+				01E64E7A25B54CFA00BF1AE3 /* Libass.swift in Sources */,
+				01E64E7B25B54CFA00BF1AE3 /* LibassBlendImage.c in Sources */,
+				01A588C825B9351400B3C164 /* QuickTime Player.swift in Sources */,
+				018A78E925C7A50300319632 /* ASSShaderTypes.swift in Sources */,
+				01E64E5A25B549C900BF1AE3 /* MainViewController.swift in Sources */,
+				0183DE4E25C1344200EA4C41 /* ASSShaders.metal in Sources */,
+				01E64E8325B57CDF00BF1AE3 /* PointerExtension.swift in Sources */,
+				01E64EAD25B855B800BF1AE3 /* NotificationNames.swift in Sources */,
 				01E64E5825B549C900BF1AE3 /* AppDelegate.swift in Sources */,
+				01E64EAB25B6E7B300BF1AE3 /* MainWindowController.swift in Sources */,
+				0128F8E325BA567F00B3E674 /* QTPlayer.swift in Sources */,
+				01AB45F725DA42D200B3C796 /* PreferencesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,8 +402,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "QuickTime ASS/QuickTime_ASS.entitlements";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/libass/include";
 				INFOPLIST_FILE = "QuickTime ASS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -339,6 +419,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/libass/lib",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.xjbeta.QuickTime-ASS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "QuickTime ASS/QuickTime ASS-Bridging-Header.h";
@@ -354,8 +435,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "QuickTime ASS/QuickTime_ASS.entitlements";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/libass/include";
 				INFOPLIST_FILE = "QuickTime ASS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -366,6 +452,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/libass/lib",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.xjbeta.QuickTime-ASS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "QuickTime ASS/QuickTime ASS-Bridging-Header.h";

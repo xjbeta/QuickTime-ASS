@@ -20,11 +20,19 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.video</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
+	<key>LSUIElement</key>
+	<true/>
 	<key>NSMainStoryboardFile</key>
 	<string>Main</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>SUFeedURL</key>
+	<string>https://raw.githubusercontent.com/xjbeta/AppUpdaterAppcasts/master/QuickTime%20ASS/Appcast.xml</string>
+	<key>SUPublicEDKey</key>
+	<string>1u1lOVNGnwTyXSIVYlfz+in5LmD7F2MPDCYWEYnwlJQ=</string>
 </dict>
 </plist>
