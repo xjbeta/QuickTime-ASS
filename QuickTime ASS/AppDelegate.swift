@@ -14,6 +14,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
     
+    let subtitleFileItem = NSMenuItem(title: "", action: nil, keyEquivalent: "")
+    
     let keyAppName = NSMenuItem()
     let keyWindowTitle = NSMenuItem()
     
@@ -51,8 +53,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         menu.addItem(keyWindowTitle)
         menu.addItem(.separator())
         
-        menu.addItem(withTitle: "Select Subtitle", action: #selector(selectSubtitle), keyEquivalent: "s")
+        subtitleFileItem.isHidden = true
         
+        menu.addItem(subtitleFileItem)
+        menu.addItem(withTitle: "Select Subtitle", action: #selector(selectSubtitle), keyEquivalent: "s")
 
         menu.addItem(NSMenuItem.separator())
         
@@ -115,11 +119,22 @@ extension AppDelegate: NSMenuDelegate, NSMenuItemValidation {
         let re = selectSubtitlePanel.runModal()
         guard re == .OK,
               let url = selectSubtitlePanel.url else { return }
-
+        
         NotificationCenter.default.post(
             name: .loadNewSubtilte,
             object: nil,
             userInfo: ["url": url.path, "info": info])
+        
+        setSubtitleName(url.lastPathComponent)
+    }
+    
+    func setSubtitleName(_ str: String) {
+        
+        let re = str.truncated(limit: 30, position: .middle, leader: "...")
+        
+        
+        subtitleFileItem.title = re
+        subtitleFileItem.isHidden = false
     }
     
     @objc func preferences() {
@@ -156,3 +171,4 @@ extension AppDelegate: NSMenuDelegate, NSMenuItemValidation {
     }
     
 }
+
