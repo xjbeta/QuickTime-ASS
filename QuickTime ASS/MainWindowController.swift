@@ -96,7 +96,6 @@ class MainWindowController: NSWindowController {
     }
     
     @objc func activeSpaceChanged(_ notification: NSNotification) {
-        print(#function)
         let info = QTPlayer.shared.frontmostAppInfo()
         
         if info.isQTPlayer,
@@ -109,7 +108,6 @@ class MainWindowController: NSWindowController {
     
     
     @objc func activateAppChanged(_ notification: NSNotification) {
-        print(#function)
         guard let app = notification.userInfo?["NSWorkspaceApplicationKey"] as? NSRunningApplication else {
             return
         }
@@ -151,8 +149,6 @@ class MainWindowController: NSWindowController {
                 case .focusedWindowChanged:
                     guard let t: String? = try element.attribute(.title) else { return }
                     self.targeWindowForced = t == self.targeWindowTitle
-                    
-                    print("focusedWindowChanged", self.targeWindowForced)
                 default:
                     break
                 }
