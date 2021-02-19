@@ -144,8 +144,11 @@ class MainWindowController: NSWindowController {
                           let p = playing else { return }
                     self.playing = p
                 case .valueChanged where try element.attribute(.description) == "timeline":
-                    self.mainVC?.updateSubtitle()
-
+                    guard let vc = self.mainVC,
+                          let playing = self.targePlayerWindow?.document?.playing,
+                          !playing else { return }
+                    
+                    vc.mtkView.draw()
                 case .focusedWindowChanged:
                     guard let t: String? = try element.attribute(.title) else { return }
                     self.targeWindowForced = t == self.targeWindowTitle
