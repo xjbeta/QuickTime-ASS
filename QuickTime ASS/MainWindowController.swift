@@ -22,9 +22,9 @@ class MainWindowController: NSWindowController {
         }
     }
     
-    var windowInFront = false {
+    var targeWindowForced = false {
         didSet {
-            updateTimerState()
+            updateASSWindow()
         }
     }
     
@@ -45,9 +45,9 @@ class MainWindowController: NSWindowController {
         window?.ignoresMouseEvents = true
         window?.orderOut(self)
         
-        NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(updateWindowState), name: NSWorkspace.didActivateApplicationNotification, object: nil)
+        NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(activateAppChanged), name: NSWorkspace.didActivateApplicationNotification, object: nil)
         
-        NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(spaceChanged), name: NSWorkspace.activeSpaceDidChangeNotification, object: nil)
+        NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(activeSpaceChanged), name: NSWorkspace.activeSpaceDidChangeNotification, object: nil)
         
         NotificationCenter.default.addObserver(forName: .enableDebug, object: nil, queue: .main) { _ in
             self.updateDebugView()
@@ -95,29 +95,22 @@ class MainWindowController: NSWindowController {
         mainVC?.debugBox.isHidden = !enableDebug
     }
     
-    @objc func spaceChanged(_ notification: NSNotification) {
-        
+    @objc func activeSpaceChanged(_ notification: NSNotification) {
+        print(#function)
         let info = QTPlayer.shared.frontmostAppInfo()
         
-        guard let w = self.window else {
-            return
-        }
-        
-        if info.isQTPlayer {
-            resizeWindow()
+        if info.isQTPlayer,
+           info.windowTitle == targeWindowTitle {
+            targeWindowForced = true
         } else {
-            if w.isVisible {
-                w.orderOut(self)
-                windowInFront = false
-            }
+            targeWindowForced = false
         }
     }
     
     
-    @objc func updateWindowState(_ notification: NSNotification) {
-        
-        guard let app = notification.userInfo?["NSWorkspaceApplicationKey"] as? NSRunningApplication,
-              let w = self.window else {
+    @objc func activateAppChanged(_ notification: NSNotification) {
+        print(#function)
+        guard let app = notification.userInfo?["NSWorkspaceApplicationKey"] as? NSRunningApplication else {
             return
         }
         
@@ -125,13 +118,16 @@ class MainWindowController: NSWindowController {
             return
         }
         
-        if app.bundleIdentifier == QTPlayer.shared.quickTimeIdentifier {
-            resizeWindow()
+        let pid = app.processIdentifier
+        
+        if pid == targeProcessIdentifier,
+           let a = Application(forProcessID: app.processIdentifier),
+           let w: UIElement = try? a.attribute(.focusedWindow),
+           let t: String = try? w.attribute(.title),
+           t == targeWindowTitle {
+            targeWindowForced = true
         } else {
-            if w.isVisible {
-                w.orderOut(self)
-                windowInFront = false
-            }
+            targeWindowForced = false
         }
     }
     
@@ -151,6 +147,12 @@ class MainWindowController: NSWindowController {
                     self.playing = p
                 case .valueChanged where try element.attribute(.description) == "timeline":
                     self.mainVC?.updateSubtitle()
+
+                case .focusedWindowChanged:
+                    guard let t: String? = try element.attribute(.title) else { return }
+                    self.targeWindowForced = t == self.targeWindowTitle
+                    
+                    print("focusedWindowChanged", self.targeWindowForced)
                 default:
                     break
                 }
@@ -165,6 +167,8 @@ class MainWindowController: NSWindowController {
             }) else { return }
             try observer?.addNotification(.moved, forElement: window)
             try observer?.addNotification(.resized, forElement: window)
+            
+            try observer?.addNotification(.focusedWindowChanged, forElement: .init(app.element))
             
             guard let elements: [UIElement] = try window.arrayAttribute(.children) else { return }
             
@@ -193,12 +197,6 @@ class MainWindowController: NSWindowController {
         rect.origin.y = screen.frame.height - rect.height - rect.origin.y
         
         w.setFrame(rect, display: true)
-        
-
-        if !w.isVisible || !w.isOnActiveSpace {
-            w.orderFront(self)
-        }
-        windowInFront = true
     }
     
     func resizeWindowAX(_ rect: NSRect) {
@@ -208,27 +206,30 @@ class MainWindowController: NSWindowController {
         var r = rect
         r.origin.y = screen.frame.height - r.height - r.origin.y
         
-        updateImageSize(r)
-        
         w.setFrame(r, display: true)
+    }
+    
+    func updateASSWindow() {
+        guard let w = window else { return }
         
-
-        if !w.isVisible || !w.isOnActiveSpace {
-            w.orderFront(self)
-            windowInFront = true
+        if targeWindowForced {
+            if !w.isVisible || !w.isOnActiveSpace {
+                w.orderFront(self)
+                resizeWindow()
+                updateTimerState()
+            }
+        } else {
+            if w.isVisible {
+                w.orderOut(self)
+            }
         }
     }
     
-    func updateImageSize(_ rect: NSRect) {
-//        guard let vc = mainVC,
-//              let image = vc.currentCGImage else { return }
-//        vc.imageView.image = NSImage(cgImage: image, size: rect.size)
-    }
     
     func updateTimerState() {
         guard let vc = mainVC else { return }
-        vc.mtkView.isPaused = !playing || !windowInFront
-        print("mtkViewisPaused \(vc.mtkView.isPaused)", "isPlaying \(playing)", "windowInFront \(windowInFront)")
+        vc.mtkView.isPaused = !playing || !targeWindowForced
+        print("mtkViewisPaused \(vc.mtkView.isPaused)", "isPlaying \(playing)", "targeWindowForced \(targeWindowForced)")
     }
     
 }
