@@ -152,6 +152,16 @@ class MainWindowController: NSWindowController {
                 case .focusedWindowChanged:
                     guard let t: String? = try element.attribute(.title) else { return }
                     self.targeWindowForced = t == self.targeWindowTitle
+                case .uiElementDestroyed:
+                    self.targeWindowForced = false
+                    let item = (NSApp.delegate as? AppDelegate)?.subtitleFileItem
+                    item?.title = ""
+                    item?.isHidden = true
+                    
+                    self.targeProcessIdentifier = nil
+                    self.targeWindowTitle = nil
+                    self.targePlayerWindow = nil
+                    self.observer?.stop()
                 default:
                     break
                 }
@@ -166,6 +176,7 @@ class MainWindowController: NSWindowController {
             }) else { return }
             try observer?.addNotification(.moved, forElement: window)
             try observer?.addNotification(.resized, forElement: window)
+            try observer?.addNotification(.uiElementDestroyed, forElement: window)
             
             try observer?.addNotification(.focusedWindowChanged, forElement: .init(app.element))
             
