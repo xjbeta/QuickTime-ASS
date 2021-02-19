@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0128F8E325BA567F00B3E674 /* QTPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0128F8E225BA567F00B3E674 /* QTPlayer.swift */; };
+		0151E26325DF7DD20093FBCA /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0151E26225DF7DD20093FBCA /* StringExtension.swift */; };
 		0183DE4E25C1344200EA4C41 /* ASSShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 0183DE4D25C1344200EA4C41 /* ASSShaders.metal */; };
 		018A78E925C7A50300319632 /* ASSShaderTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018A78E825C7A50300319632 /* ASSShaderTypes.swift */; };
 		0198EA0A25BBC961002D0B2A /* AXSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0198EA0825BBC961002D0B2A /* AXSwift.framework */; };
@@ -57,6 +58,7 @@
 
 /* Begin PBXFileReference section */
 		0128F8E225BA567F00B3E674 /* QTPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QTPlayer.swift; sourceTree = "<group>"; };
+		0151E26225DF7DD20093FBCA /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		0183DE4D25C1344200EA4C41 /* ASSShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = ASSShaders.metal; sourceTree = "<group>"; };
 		018A78E825C7A50300319632 /* ASSShaderTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASSShaderTypes.swift; sourceTree = "<group>"; };
 		0198EA0725BBC961002D0B2A /* AXSwift.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = AXSwift.framework.dSYM; path = Carthage/Build/Mac/AXSwift.framework.dSYM; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				01E64E8225B57CDF00BF1AE3 /* PointerExtension.swift */,
+				0151E26225DF7DD20093FBCA /* StringExtension.swift */,
 				01E64EAC25B855B800BF1AE3 /* NotificationNames.swift */,
 			);
 			path = Extensions;
@@ -262,6 +265,7 @@
 				01E64E5825B549C900BF1AE3 /* AppDelegate.swift in Sources */,
 				01E64EAB25B6E7B300BF1AE3 /* MainWindowController.swift in Sources */,
 				0128F8E325BA567F00B3E674 /* QTPlayer.swift in Sources */,
+				0151E26325DF7DD20093FBCA /* StringExtension.swift in Sources */,
 				01AB45F725DA42D200B3C796 /* PreferencesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
